@@ -1,0 +1,26 @@
+# python use static scoping.
+# to detect if the scoping of variables in python is static or dynamic,
+
+
+# static scoping variable has block of bound.
+# dynamic scope based on calling sequences of program units, not their textual layout.
+
+def fun():
+
+    def fun1():
+        x = 4 #return 4 if dynamic
+    def fun2():
+        y = x
+        return y
+
+    x = 1 #return 1 if static
+    return fun2()
+
+
+def main():
+    print(fun())
+
+main()
+
+# the function returns 1, which means python variables are static.
+    

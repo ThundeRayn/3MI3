@@ -1,0 +1,106 @@
+[Question1]: 
+
+    static
+	defn: fixed-length array, the array that have its size determined once it's created and allocated. subscript ranges are statically bound and storage allocation is static (before runtime) 
+	advantage: efficiency, know the size of the array at compiling time, there is no dynamic allocation. programmer does not have to request or free any memory.
+
+    fixed stack-dynamic
+	defn: subscript ranges are statically bound, but the allocation is done at declaration time. 
+	advantage:space efficiency
+
+    stack-dynamic
+	defn: the subscript ranges are dynamically bound, and the storage allocation is dynamic “during execution.” Once bound they remain fixed during the lifetime of the variable. 
+	advantage: flexibility, size need not be known until the array is going to be used
+
+    fixed heap-dynamic
+	defn: storage binding is dynamic but fixed after allocation (i.e., binding is done when requested and storage is allocated from heap, not stack)
+	advantage: flexibility for storage binding and then allocated(space efficiency)
+
+    heap-dynamic arrays
+	defn: binding of subscript ranges and storage allocation is dynamic and can change any number of times
+	advantage: flexibility, array can change its size during program execution.
+
+
+
+
+[Question2]: 
+how does Binary Coded Decimal format work:
+
+	- BCD is a class of binary encodings of decimal numbers where each digit is represented by a fixed number of bits, usually between 4 and 8. sometimes special bit patterns are used for a sign or other indicates.
+
+	- for example, each digit is a 4-bit binary that have the first one bit from the right 1 =1, the second bit 1=2, the third 1 = 4 and the final 1=8, with different combination to represent different decimal values 0-9. 
+
+how it may waste memory in comparison to binary format:
+
+	- Binary code can represent pretty much anything that can be encoded as digital information with out any semantics, while BCD code is decimal numbers represented as bits, hence has the semantics of positive integer values.
+
+	- example: for 11 as a decimal number, use 4-bit, binary system represents it as 1011, while BCD represents it as 1 and 1, that is (0001) and (0001), 11 would be 0001 0001, BCD wastes more memory.
+
+
+[Question3]: 
+  compare the tombstone and lock-and-key methods of avoiding dangling pointers
+
+	- dangling pointers: a pointer points to a heap-dynamic variable that has been deallocated.
+
+	- how tombstone works: extra heap cell that is a pointer to the heap-dynamic variable. once memory is allocated, assigned it to a pointer called tombstone. The pointer in our program points to tombstone, and then tombstone points to the object. once the deallocated, assign NULL to tombstone, therefore pointers in our program would not be dangling pointers.
+
+	- how lock-and-key works:Pointer values are represented as (key, address) pairs. once the memory is allocated, space for one more cell called the lock cell is allocated. The pointer points to this memory is stored as a tuple containing an address and a key, pointer is allowed to access the memory iff values of the lock and key matches, otherwise return error. Now, once deallocated, assgin NULL to the lock, so lock and key won't match and runtime error would be thrown, thus it prevents dangling pointers. new lock cell is needed when re-allocated.
+
+	- safety(memory): lock-and-key needs to allocate extra cells for each of the values, while tombstone needs extra pointer between pointers and objects. but tombstones are never deallocated, their storage is never reclaimed.
+
+	- implementation cost: lock-and key costs  time because every pointer needs a comparison for access. both have to assign NULL to tombstone/locker value.
+
+
+
+[Question4]: 
+explain how coercion rules can weaken the beneficial effect of strong typing? give examples.
+
+	- main problem: they can weaken it considerably. Coercion rules can cause issues, a type can be converted to another type and it would be hard to debug. It also defeats the purpose of strong typing which is designed to keep type changing from happening.
+	- an example: a strongly typed code have a strictly type rule so that the beneficial of strong typing could be max, it would be easier to debug and be more safe. we now have an int value, if the type of value can never be changed, then the type is always fixed. However, by coercion rule change the int value to a string, then by somehow the type could be changed, and the strict rules are broken.
+
+
+
+[Question5]:
+briefly discuss in one or two paragraphs why a garbage collector in C++ would not make sense.
+
+	- C++ generally prefers performance over safety, it gives the programmer full control and could do almost anything, the programmer choose C++ are willing to invest more into development to have maximum performance, and C++ should consider the user requirements. It should not push anything to the programmer that might effect the performance.
+
+[Question6]:
+define operator precedence: The operator precedence rules for expression evaluation define the order in which “adjacent” operators of different precedence levels are evaluated. it indicates which operator to be operated first, for instance,  (3+ 2*1), do 2*1 =2 then 3+ 2
+
+define operator associativity: The operator associativity rules for expression evaluation define the order in which adjacent operators with the same precedence level are evaluated. typical associativity is left to right, but some are right to left. for example, + and - have same precedence, 3-2+5, you do from left to right, firstly 3-2=1, then do 1+5=6.
+
+[Question7]:
+a. (((a*b) -1) +c)
+b. (((a * (b-1)) / c) mod d)
+c. (((a-b)/c) & (((d*e)/a) - 3))
+d. ((-a) or ((c=d) and e))
+e. (((a>b) xor c) or (d <= 17))
+f. ((-a) + b)
+
+[Question8]:
+a. 4
+b. 7
+c. use the same program as presented in question8, for example we know + is left to right, both a. and b. would give 7(since always return 4 then do addition). if use some right to left association method, it's still the case. for example not, have program
+
+boolean fun(boolean B) {
+   return True;
+}
+int main() {
+   boolean x = False
+   x = not fun(x)
+   return x;
+}
+
+we will found the main returns False, which means it firstly do fun and then operate not. function is higher than not: If not have higher procedure, x would be True (function returns true anyway). Since not is one of the highest visible operation except ->, ++, etc. program structure operation, we know that function call is one of the highest system defined operation.
+  
+
+
+
+
+
+
+
+
+
+

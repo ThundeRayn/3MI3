@@ -1,0 +1,675 @@
+% Created 2022-11-08 Tue 10:27
+% Intended LaTeX compiler: pdflatex
+\documentclass[11pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{graphicx}
+\usepackage{longtable}
+\usepackage{wrapfig}
+\usepackage{rotating}
+\usepackage[normalem]{ulem}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{capt-of}
+\usepackage{hyperref}
+\usepackage{hyperref}
+\usepackage{amsmath}
+\usepackage{listings}
+\usepackage{xcolor}
+\usepackage{graphicx}
+\definecolor{codegreen}{rgb}{0,0.6,0}
+\definecolor{codegray}{rgb}{0.5,0.5,0.5}
+\definecolor{codepurple}{rgb}{0.58,0,0.82}
+\definecolor{backcolour}{rgb}{0.95,0.95,0.92}
+\lstdefinestyle{mystyle}{
+backgroundcolor=\color{backcolour},
+commentstyle=\color{codegreen},
+keywordstyle=\color{magenta},
+numberstyle=\tiny\color{codegray},
+stringstyle=\color{codepurple},
+basicstyle=\ttfamily\footnotesize,
+breakatwhitespace=false,
+breaklines=true,
+captionpos=b,
+keepspaces=true,
+numbers=left,
+numbersep=5pt,
+showspaces=false,
+showstringspaces=false,
+showtabs=false,
+tabsize=2
+}
+\lstset{style=mystyle, language=Python}
+\author{Habib Ghaffari}
+\date{\textit{<2022-10-31 Mon>}}
+\title{Tutorial \#6 - Names, Bindings and Scopes}
+\hypersetup{
+ pdfauthor={Habib Ghaffari},
+ pdftitle={Tutorial \#6 - Names, Bindings and Scopes},
+ pdfkeywords={},
+ pdfsubject={},
+ pdfcreator={Emacs 28.1 (Org mode 9.5.2)}, 
+ pdflang={English}}
+\begin{document}
+
+\maketitle
+\tableofcontents
+
+
+
+\section{Introduction}
+\label{s1}
+Today, we are going to review the topics presented in chapter 5. Then we will
+try to solve some sample examples that will help you answer some of the
+questions presented in assignment \#2.
+
+\section{Names}
+\label{s2}
+A name is a string of characters used to identify some entity in a program.
+Names in most programming languages have the same form: a letter followed by a
+string consisting of letters, digits, and underscore characters \texttt{( \_ )}.
+
+Examples:
+
+\texttt{Haskell}
+\begin{verbatim}
+<H_ID> ::= <head> {<tail>}
+<head> ::= <upper> | <lower>
+<tail> ::= <upper> | <lower> | <special> | <digits> | '
+<lower> ::= a | b | c | d | e | f | g | h | i | j | k | l | m | n | o | p | q | r | s | t | u | v | w | x | y | z | _
+<upper> ::= A | B | C | D | E | F | G | H | I | J | K | L | M | N | O | P | Q | R | S | T | U | V | W | X | Y | Z
+<digits> ::= 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9
+\end{verbatim}
+
+Two main primary issues with naming are?
+
+\begin{itemize}
+\item Case sensitivity
+\item Special words
+
+\item Question:
+\begin{itemize}
+\item What is a reserved word?
+\end{itemize}
+
+\item Exercise: Look at the following names:
+
+\begin{enumerate}
+\item FirstName
+
+\item First\textsubscript{Name}
+
+\item firstname
+
+\item firstName
+
+\item Which one is better in terms of Readability?
+
+\item Which one is better in terms of Writability?
+
+\item Which one is accepted in C programming language?
+
+\item Which one is better in Python programming language?
+
+\item Which one is \emph{cammel notation}?
+
+\item Which one is not popular anymore?
+\end{enumerate}
+\end{itemize}
+
+
+A program variable is an abstraction of a computer memory cell or collection
+of cells.
+
+Variables can be characterized as a sextuple of attributes:
+
+\begin{itemize}
+\item Name
+
+\item Address: The memory address with which it is associated
+
+\item Value: The contents of the location with which the variable is associated
+
+\item Type: determines the range of values of variables and the set of operations
+that are defined for values of that type; in the case of floating point, type
+also determines the precision
+
+\item Lifetime [Discuss later]
+
+\item Scope [Discuss later]
+\end{itemize}
+
+
+
+\section{Binding}
+\label{s3}
+A binding is an association between an entity and an attribute, such as between
+a variable and its type or value, or between an operation and a symbol. Binding
+time is the time at which a binding takes place.
+
+\begin{itemize}
+\item A binding is static if it first occurs before run time and remains
+unchanged throughout program execution.
+\begin{itemize}
+\item Type may be specified by explicit or implicit deceleration:
+
+\begin{itemize}
+\item Question: Bring one example for each of the above decelerations:
+\end{itemize}
+\end{itemize}
+\end{itemize}
+
+\begin{verbatim}
+var sum = 0;
+var total = 0.0;
+var name = "Fred";
+\end{verbatim}
+
+
+
+\begin{itemize}
+\item A binding is dynamic if it first occurs during execution or can change during
+execution of the program
+\end{itemize}
+
+\subsection{Storage Bindings and Lifetime}
+\label{sec:orge5f5087}
+
+
+
+\section{Scope and Lifetime}
+\label{s4}
+The scope of a variable is the range of statements over which it is visible.
+
+The local variables of a program unit are those that are declared in that unit.
+The nonlocal variables of a program unit are those that are visible in the unit
+but not declared there. Global variables are a special category of nonlocal variables
+
+\subsection{Static Scope}
+\label{sec:org272fbdd}
+
+The general rule for tracing visibility of a variable:
+
+\begin{itemize}
+\item Search declarations, first locally, then in increasingly larger enclosing
+scopes, until one is found for the given name
+
+\item Enclosing static scopes (to a specific scope) are called its static ancestors;
+the nearest static ancestor is called a static parent
+
+\item Some languages allow nested subprogram definitions, which create nested static
+scopes
+
+\item Variables can be hidden from a unit by having a "closer" variable with the
+same name
+\end{itemize}
+
+
+\begin{verbatim}
+
+function big() { function sub1() {
+var x = 7;
+sub2(); }
+function sub2() { var y = x;
+}
+var x = 3; sub1();
+}
+\end{verbatim}
+
+What if we consider the static scope rules to trace the visibility of \texttt{x}:
+
+\subsection{Blocks}
+\label{sec:org2f98579}
+
+\begin{itemize}
+\item The scopes created by blocks, which could be nested in larger blocks, are
+treated exactly like those created by subprograms.
+\end{itemize}
+
+\begin{verbatim}
+void sub() {
+   int count=1;
+    while (count <=100) {
+      int count=2;
+      count++;
+      ...
+   }
+   printf(count);
+   ...
+}
+\end{verbatim}
+
+
+
+\begin{itemize}
+\item In \texttt{Let} Scheme:
+\end{itemize}
+
+\begin{verbatim}
+In Scheme:
+(LET (
+   (name1 expression1) ...
+   (namen expressionn)
+)
+\end{verbatim}
+
+\subsection{Dynamic Scope}
+\label{sec:orgab133dc}
+
+General rule for tracing visibility in dynamic scope:
+
+\begin{itemize}
+\item Based on calling sequences of program units, not their textual layout
+
+\item References to variables are connected to declarations by searching back
+through the chain of subprogram calls that forced execution to this point
+\end{itemize}
+
+\begin{verbatim}
+function big() {
+    function sub1() {
+      var x = 7;
+      sub2();
+    }
+    function sub2() { var y = x;
+    }
+    var x = 3;
+    sub1();
+}
+\end{verbatim}
+
+Consider tracing this code based on dynamic scope rules. What would be the
+reference point for \texttt{x}?
+
+When it comes to lifetime, it becomes a bit confusing. Even though it seems that
+these two are related to each other but they are totally different concepts.
+
+
+\subsection{Referencing Enviroments}
+\label{sec:org230ce70}
+
+The referencing environment of a statement is the collection of all variables
+that are visible in the statement. The referencing environment of a statement in
+a static- scoped language is the variables declared in its local scope plus the
+collection of all variables of its ancestor scopes that are visible.
+
+\begin{verbatim}
+g = 3; # A global
+def sub1():
+a = 5; # Creates a local
+b = 7; # Creates another local
+. . . <------------------------------ 1
+def sub2():
+global g; # Global g is now assignable here
+c = 9; # Creates a new local
+. . . <------------------------------ 2 def sub3():
+nonlocal c: # Makes nonlocal c visible here g = 11; # Creates a new local
+. . . <------------------------------ 3
+\end{verbatim}
+
+
+The referencing environments of the indicated program points are as follows:
+
+
+\begin{center}
+\begin{tabular}{rll}
+\hline
+pints & Variables & Where Declared\\
+\hline
+1) & a b & sub 1\\
+ & g & g for referencing\\
+\hline
+2) & c & sub2\\
+ & g & \\
+\hline
+3) & c & nonlocal sub2\\
+ & g & sub 3 (local)\\
+\hline
+\end{tabular}
+\end{center}
+
+Let's have a look at another example:
+
+\begin{verbatim}
+void sub1() {
+  int a, b;
+  . . . <------------ 1
+ } /* end of sub1 */
+void sub2() {
+  int b, c;
+ . . . . <------------ 2 sub1();
+ } /* end of sub2 */
+void main() {
+ int c, d;
+ . . . <------------ 3
+ sub2();
+  }  /* end of main */
+\end{verbatim}
+
+Consider the following example program. Assume that the only function calls are
+the following: \texttt{main} calls \texttt{sub2}, which calls \texttt{sub1}.
+
+The referencing environments of the indicated program points are as follows:
+
+\begin{center}
+\begin{tabular}{rll}
+\hline
+pints & Variables & Where Declared\\
+\hline
+1) & a b & sub1\\
+ & c & sub2\\
+ & d & main\\
+ & b c of sub2 & hidden\\
+ & b of main & hidden\\
+\hline
+2) & b c & sub2\\
+ & d & main\\
+ & c of main & hidden\\
+\hline
+3) & c d & main\\
+ &  & \\
+\hline
+\end{tabular}
+\end{center}
+
+\section{Questions:}
+\label{sec:org1bbf1f2}
+
+\begin{enumerate}
+\item Consider the following JavaScript skeletal program:
+\end{enumerate}
+
+\begin{verbatim}
+ // The main program
+ var x;
+ function sub1(){
+     var x:
+     function sub2(){
+         . . .
+     }
+ } 
+ function sub3(){
+ . . .
+}
+\end{verbatim}
+
+Assume that the execution of this program is in the following unit order:
+
+\begin{itemize}
+\item \texttt{main} calls \texttt{sub1}
+\item \texttt{sub1} calls \texttt{sub2}
+\item \texttt{sub2} calls \texttt{sub3}
+\end{itemize}
+
+Assuming static scoping, in the following, which declaration of \texttt{x} is the
+correct one for a reference to \texttt{x}?
+
+i. \texttt{sub1}, Why? (sub1)
+ii. \texttt{sub2}, Why? (sub1)
+iii. \texttt{sub3}, Why? (main)
+
+Repeat part a, but assume dynamic scoping:
+
+
+i. \texttt{sub1}, Why? (sub1)
+ii. \texttt{sub2}, Why? (sub1) 
+iii. \texttt{sub3}, Why? (sub1)
+
+\begin{enumerate}
+\item Let's write a peace of code in \texttt{JavaScript}:
+\end{enumerate}
+
+\begin{verbatim}
+var x;
+function sub1() {
+ document.write("x = " + x + "");
+}
+function sub2() {
+ var x;
+
+ x = 10;
+ sub1();
+}
+x = 5;
+sub2();
+\end{verbatim}
+
+\begin{itemize}
+\item What value of \texttt{x} is displayed if we use static-scope rules? Why?
+
+x = 5
+
+\item What if we use dynamic-scope rules? Why?
+
+x = 10
+
+\item Let's write another piece of code in \texttt{JavaScript}:
+\end{itemize}
+
+\begin{verbatim}
+var x, y, z;
+function sub1() {
+var a, y, z;
+  function sub2() {
+   var a, b, z;
+   . . .
+  }
+  . . .
+}
+function sub3() {
+  var a, x, w;
+  . . .
+}
+\end{verbatim}
+
+List all the variables, along with the program units where they are declared,
+that are visible in the bodies of \texttt{sub1}, \texttt{sub2}, and \texttt{sub3}, assuming
+static scoping is used. Justify your answer:
+
+\begin{itemize}
+\item In sub1:
+a     sub1
+y     sub1
+z     sub1
+x     main
+\item In sub2:
+a sub2
+b     sub2
+z     sub2
+y     sub1
+x     main
+\item In sub3:
+a sub3
+x sub3
+w sub3
+y main
+z main
+
+\item Consider the following \texttt{C} program:
+\end{itemize}
+
+\begin{verbatim}
+void fun(void) {
+int a, b, c; /* definition 1 */
+. . .
+while (. . .) {
+int b, c, d; /*definition 2 */
+. . . <------------- 1
+while (. . .) {
+int c, d, e; /* definition 3 */
+. . . <------------- 2
+}
+. . . <-------------- 3
+}
+. . . <---------------- 4
+}
+\end{verbatim}
+
+For each of the four marked points in this function, list each visible variable,
+along with the number of the definition statement that defines it. Justify your
+answer?
+
+
+\begin{itemize}
+\item Point 1:
+a 1
+b 2
+c 2
+d 2
+\item Point 2:
+a 1
+b 2
+c 3
+d 3
+e 3
+\item Point 3:
+a 1
+b 2
+c 2
+d 2
+\end{itemize}
+Point 4:
+  a 1
+  b 1
+  c 1
+
+
+\begin{enumerate}
+\item Consider the following skeletal \texttt{C} program:
+\end{enumerate}
+
+\begin{verbatim}
+void fun1(void); /* prototype */
+void fun2(void); /* prototype */
+void fun3(void); /* prototype */
+void main() {
+int a, b, c;
+. . .
+}
+void fun1(void) {
+int b, c, d;
+. . .
+}
+void fun2(void) {
+int c, d, e;
+. . .
+}
+void fun3(void) {
+int d, e, f;
+. . .
+}
+\end{verbatim}
+
+Given the following calling sequences and assuming that dynamic scoping is used,
+what variables are visible during execution of the last function called? Include
+with each visible variable the name of the function in which it was defined.
+Justify your answer?
+
+a. \texttt{main} calls \texttt{fun1}; \texttt{fun1} calls \texttt{fun2}; \texttt{fun2} calls \texttt{fun3}.
+b. \texttt{main} calls \texttt{fun1}; \texttt{fun1} calls \texttt{fun3}.
+c. \texttt{main} calls \texttt{fun2}; \texttt{fun2} calls \texttt{fun3}; \texttt{fun3} calls \texttt{fun1}.
+d. \texttt{main} calls \texttt{fun3}; \texttt{fun3} calls \texttt{fun1}.
+e. \texttt{main} calls \texttt{fun1}; \texttt{fun1} calls \texttt{fun3}; \texttt{fun3} calls \texttt{fun2}.
+f. \texttt{main} calls \texttt{fun3}; \texttt{fun3} calls \texttt{fun2}; \texttt{fun2} calls \texttt{fun1}.
+
+\begin{center}
+\begin{tabular}{lll}
+\hline
+Question & Variables & Where Declared\\
+\hline
+a) & d e f & fun3\\
+ & c & fun2\\
+ & b & fun1\\
+ & a & main\\
+\hline
+b) & d e f & fun3\\
+ & b c & fun1\\
+ & a & main\\
+\hline
+c) & b c d & fun1\\
+ & e f & fun3\\
+ & a & main\\
+\hline
+d) & b c d & fun1\\
+ & e f & fun3\\
+ & a & main\\
+\hline
+e) & c d e & fun2\\
+ & f & fun3\\
+ & b & fun1\\
+ & a & main\\
+\hline
+f) & b c d & fun1\\
+ & e & fun2\\
+ & f & fun3\\
+ & a & main\\
+\hline
+\end{tabular}
+\end{center}
+
+\begin{enumerate}
+\item Consider the following program, written in \texttt{JavaScript}-like
+\end{enumerate}
+syntax:
+
+\begin{verbatim}
+// main program
+var x, y, z;
+function sub1() {
+var a, y, z;
+. . .
+}
+function sub2() {
+var a, b, z;
+. . .
+}
+function sub3() {
+var a, x, w;
+. . .
+}  
+\end{verbatim}
+
+
+Given the following calling sequences and assuming that dynamic scoping
+is used, what variables are visible during execution of the last subprogram
+activated? Include with each visible variable the name of the unit
+where it is declared.
+
+
+a. \texttt{main} calls \texttt{sub1}; \texttt{sub1} calls \texttt{sub2}; \texttt{sub2} calls \texttt{sub3}.
+b. \texttt{main} calls \texttt{sub1}; \texttt{sub1} calls \texttt{sub3}.
+c. \texttt{main} calls \texttt{sub2}; \texttt{sub2} calls \texttt{sub3}; \texttt{sub3} calls \texttt{sub1}.
+d. \texttt{main} calls \texttt{sub3}; \texttt{sub3} calls \texttt{sub1}.
+e. \texttt{main} calls \texttt{sub1}; \texttt{sub1} calls \texttt{sub3}; \texttt{sub3} calls \texttt{sub2}.
+f. \texttt{main} calls \texttt{sub3}; \texttt{sub3} calls \texttt{sub2}; \texttt{sub2} calls \texttt{sub1}.
+
+\begin{center}
+\begin{tabular}{lll}
+\hline
+Question & Variables & Where Declared\\
+\hline
+a) & a x w & sub3\\
+ & b z & sub2\\
+ & y & sub1\\
+\hline
+b) & a x w & sub3\\
+ & y z & sub1\\
+\hline
+c) & a y z & sub1\\
+ & x w & sub3\\
+ & b & sub2\\
+\hline
+d) & a y z & sub1\\
+ & x w & sub3\\
+\hline
+e) & a b z & sub2\\
+ & x w & sub3\\
+ & y & sub1\\
+\hline
+f) & a y z & sub1\\
+ & b & sub2\\
+ & x w & sub3\\
+\hline
+\end{tabular}
+\end{center}
+\end{document}

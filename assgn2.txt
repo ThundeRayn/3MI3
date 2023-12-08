@@ -1,0 +1,144 @@
+[Question1]: 
+ java class C2,C,C1.  
+ C1 is a subclass of C, while C is a subclass of C2.
+ Java expression c.x() + c.y(); [where c is type C]
+ for each symbol of the statement, list all the various bindings that are required to
+ determine the semantics of the statement when it is to be executed, indicate the binding 
+ time for each binding.
+
+ statement symbols:
+
+	- Identifies: c 
+	- Operators: +  . ( ) ;
+	- functions: x y
+ 
+ for c
+	- type: compile time, binding a type in c
+	- address: runtime, binding a non static local variable to a memory cell
+	- value: runtime binding
+	- scope: compile time, binding(static scoping c)
+	- life time: as long as the program is running
+
+ for +
+	- compile time, binding to sum
+
+ for . ( ) ; 
+	- language design time binding
+
+ for x y
+	- language design time binding
+	- scope: compile time
+	
+
+
+Question2:
+ consider skeletal C program, for each marked pts, list each visible variable with defn.
+
+	pt1: visible a,b,c,e,f
+		a,b,c defined by definition 2
+		e,f defined by definition 1
+
+	pt2: visible a,b,c,d,e,f
+		b,c,d defined by definition 3
+		a defined by definition 2
+		e,f defined by definition 1
+
+	pt3: visible a,b,c,d,e,f
+		a,c defined by definition 5
+		d,e defined by definition 4
+		b defined by definition 3
+		a defined by definition 2
+		f defined by definition 1
+
+	pt4: visible a,b,c,d,e,f
+		c,d,e defined by definition 4
+		b defined by definition 3
+		a defined by definition 2
+		f defined by definition 1
+
+	pt5: visible a,b,c,d,e,f
+		b,c,d defined by definition 3
+		a defined by definition 2
+		e,f defined by definition 1
+
+	pt6: visible a,b,c,e,f
+		a,b,c defined by definition 2
+		e,f defined by definition 1
+
+Question3: 
+ consider the following skeletal c program, assume dynamic scoping of variables is used, for each of the following calling sequences a-f, what variables are visible during execution of the last function called? include with each visible variable with the name of the function in which it was defined.
+
+	(a)visible a,b,c,d,e,f
+		a,b,c defined by func2
+		d,e,f defined by func3
+
+	(b)visible a,b,c,d,e,f
+		a,b,c defined by func2
+		d,e defined by func1
+		f defined by main
+
+	(c)visible a,b,c,d,e,f
+		d,e,f defined by func3
+		b defined by func1
+		a,c defined by func2
+
+	(d)visible a,b,c,f
+		a,b,c defined by func2
+		f defined by main
+
+	(e)visible a,b,c,d,e,f
+		d,e,f defined by func3
+		a,b,c defined by func2
+
+	(f)visible a,b,c,d,e,f
+		a,b,c defined by func2
+		d,e,f defined by func3
+
+Question4:
+
+ vi script1.sh
+
+ #!/bin/bash
+
+ X="hello"
+ echo $X
+
+ vi script2.sh
+
+ #!/bin/bash
+
+ X ="world"
+ echo $X
+
+ sh ./script1.sh
+
+ behavior for the two scripts:For script1, it prints hello, for script2, print world then hello.
+ explanation: the scope works like dynamic scope rules. all variables are local to the script, therefore x in script1 prints hello, x in script2 prints world. when script2 call script1, script1 reads its own x so print hello, and this does no change in script2's x.
+
+
+Question5:
+briefly discuss in one or two paragraphs why arithmetic on Java references would not make sense.
+	Pointers is a variable that can store an address(indicates where another variable is stored) but not the value that needs to be calculated. It doesn't make sense to do arithmetic on addresses(may get a new address but will not make any sense, and will change nothing to the variables)
+	The Reference is an alias, it refers to an existing object/variable. Arithmetic on references may cause error(calculation make nonsense).
+
+
+Question6:
+When you want to compare Plant and Fruit, You have to firstly have
+if Plant !=Fruit(will return true), then print "Apple may not be sweet"
+But when comparing Fruit to Plant, you firstly do
+if Fruit ==Plant (will return true), then print "Sweet apple is apple"
+
+findings:
+Since edit __eq__ and __ne__ makes iff relationship, python won't consider the order, so I can not do sweet apple is apple while apple might not be sweet. I simply set ne and eq all work, therefore I have to pick the first condition that need to be checked for the body part.
+
+cons and pros:
+python can test this within one file and the class component could be simple, we can edit __eq__ and __ne__ functions which increase the writability and readability. However, this require the programer to be very careful for the body part, wrong statement might occur if the algorithm has a wrong order. 
+
+
+
+
+
+
+
+
+

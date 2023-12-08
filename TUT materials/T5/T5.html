@@ -1,0 +1,998 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<!-- 2022-11-01 Tue 12:13 -->
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Tutorial #5 - Let's have a review together</title>
+<meta name="author" content="Habib Ghaffari" />
+<meta name="generator" content="Org Mode" />
+<style>
+  #content { max-width: 60em; margin: auto; }
+  .title  { text-align: center;
+             margin-bottom: .2em; }
+  .subtitle { text-align: center;
+              font-size: medium;
+              font-weight: bold;
+              margin-top:0; }
+  .todo   { font-family: monospace; color: red; }
+  .done   { font-family: monospace; color: green; }
+  .priority { font-family: monospace; color: orange; }
+  .tag    { background-color: #eee; font-family: monospace;
+            padding: 2px; font-size: 80%; font-weight: normal; }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .org-right  { margin-left: auto; margin-right: 0px;  text-align: right; }
+  .org-left   { margin-left: 0px;  margin-right: auto; text-align: left; }
+  .org-center { margin-left: auto; margin-right: auto; text-align: center; }
+  .underline { text-decoration: underline; }
+  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
+  p.verse { margin-left: 3%; }
+  pre {
+    border: 1px solid #e6e6e6;
+    border-radius: 3px;
+    background-color: #f2f2f2;
+    padding: 8pt;
+    font-family: monospace;
+    overflow: auto;
+    margin: 1.2em;
+  }
+  pre.src {
+    position: relative;
+    overflow: auto;
+  }
+  pre.src:before {
+    display: none;
+    position: absolute;
+    top: -8px;
+    right: 12px;
+    padding: 3px;
+    color: #555;
+    background-color: #f2f2f299;
+  }
+  pre.src:hover:before { display: inline; margin-top: 14px;}
+  /* Languages per Org manual */
+  pre.src-asymptote:before { content: 'Asymptote'; }
+  pre.src-awk:before { content: 'Awk'; }
+  pre.src-authinfo::before { content: 'Authinfo'; }
+  pre.src-C:before { content: 'C'; }
+  /* pre.src-C++ doesn't work in CSS */
+  pre.src-clojure:before { content: 'Clojure'; }
+  pre.src-css:before { content: 'CSS'; }
+  pre.src-D:before { content: 'D'; }
+  pre.src-ditaa:before { content: 'ditaa'; }
+  pre.src-dot:before { content: 'Graphviz'; }
+  pre.src-calc:before { content: 'Emacs Calc'; }
+  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
+  pre.src-fortran:before { content: 'Fortran'; }
+  pre.src-gnuplot:before { content: 'gnuplot'; }
+  pre.src-haskell:before { content: 'Haskell'; }
+  pre.src-hledger:before { content: 'hledger'; }
+  pre.src-java:before { content: 'Java'; }
+  pre.src-js:before { content: 'Javascript'; }
+  pre.src-latex:before { content: 'LaTeX'; }
+  pre.src-ledger:before { content: 'Ledger'; }
+  pre.src-lisp:before { content: 'Lisp'; }
+  pre.src-lilypond:before { content: 'Lilypond'; }
+  pre.src-lua:before { content: 'Lua'; }
+  pre.src-matlab:before { content: 'MATLAB'; }
+  pre.src-mscgen:before { content: 'Mscgen'; }
+  pre.src-ocaml:before { content: 'Objective Caml'; }
+  pre.src-octave:before { content: 'Octave'; }
+  pre.src-org:before { content: 'Org mode'; }
+  pre.src-oz:before { content: 'OZ'; }
+  pre.src-plantuml:before { content: 'Plantuml'; }
+  pre.src-processing:before { content: 'Processing.js'; }
+  pre.src-python:before { content: 'Python'; }
+  pre.src-R:before { content: 'R'; }
+  pre.src-ruby:before { content: 'Ruby'; }
+  pre.src-sass:before { content: 'Sass'; }
+  pre.src-scheme:before { content: 'Scheme'; }
+  pre.src-screen:before { content: 'Gnu Screen'; }
+  pre.src-sed:before { content: 'Sed'; }
+  pre.src-sh:before { content: 'shell'; }
+  pre.src-sql:before { content: 'SQL'; }
+  pre.src-sqlite:before { content: 'SQLite'; }
+  /* additional languages in org.el's org-babel-load-languages alist */
+  pre.src-forth:before { content: 'Forth'; }
+  pre.src-io:before { content: 'IO'; }
+  pre.src-J:before { content: 'J'; }
+  pre.src-makefile:before { content: 'Makefile'; }
+  pre.src-maxima:before { content: 'Maxima'; }
+  pre.src-perl:before { content: 'Perl'; }
+  pre.src-picolisp:before { content: 'Pico Lisp'; }
+  pre.src-scala:before { content: 'Scala'; }
+  pre.src-shell:before { content: 'Shell Script'; }
+  pre.src-ebnf2ps:before { content: 'ebfn2ps'; }
+  /* additional language identifiers per "defun org-babel-execute"
+       in ob-*.el */
+  pre.src-cpp:before  { content: 'C++'; }
+  pre.src-abc:before  { content: 'ABC'; }
+  pre.src-coq:before  { content: 'Coq'; }
+  pre.src-groovy:before  { content: 'Groovy'; }
+  /* additional language identifiers from org-babel-shell-names in
+     ob-shell.el: ob-shell is the only babel language using a lambda to put
+     the execution function name together. */
+  pre.src-bash:before  { content: 'bash'; }
+  pre.src-csh:before  { content: 'csh'; }
+  pre.src-ash:before  { content: 'ash'; }
+  pre.src-dash:before  { content: 'dash'; }
+  pre.src-ksh:before  { content: 'ksh'; }
+  pre.src-mksh:before  { content: 'mksh'; }
+  pre.src-posh:before  { content: 'posh'; }
+  /* Additional Emacs modes also supported by the LaTeX listings package */
+  pre.src-ada:before { content: 'Ada'; }
+  pre.src-asm:before { content: 'Assembler'; }
+  pre.src-caml:before { content: 'Caml'; }
+  pre.src-delphi:before { content: 'Delphi'; }
+  pre.src-html:before { content: 'HTML'; }
+  pre.src-idl:before { content: 'IDL'; }
+  pre.src-mercury:before { content: 'Mercury'; }
+  pre.src-metapost:before { content: 'MetaPost'; }
+  pre.src-modula-2:before { content: 'Modula-2'; }
+  pre.src-pascal:before { content: 'Pascal'; }
+  pre.src-ps:before { content: 'PostScript'; }
+  pre.src-prolog:before { content: 'Prolog'; }
+  pre.src-simula:before { content: 'Simula'; }
+  pre.src-tcl:before { content: 'tcl'; }
+  pre.src-tex:before { content: 'TeX'; }
+  pre.src-plain-tex:before { content: 'Plain TeX'; }
+  pre.src-verilog:before { content: 'Verilog'; }
+  pre.src-vhdl:before { content: 'VHDL'; }
+  pre.src-xml:before { content: 'XML'; }
+  pre.src-nxml:before { content: 'XML'; }
+  /* add a generic configuration mode; LaTeX export needs an additional
+     (add-to-list 'org-latex-listings-langs '(conf " ")) in .emacs */
+  pre.src-conf:before { content: 'Configuration File'; }
+
+  table { border-collapse:collapse; }
+  caption.t-above { caption-side: top; }
+  caption.t-bottom { caption-side: bottom; }
+  td, th { vertical-align:top;  }
+  th.org-right  { text-align: center;  }
+  th.org-left   { text-align: center;   }
+  th.org-center { text-align: center; }
+  td.org-right  { text-align: right;  }
+  td.org-left   { text-align: left;   }
+  td.org-center { text-align: center; }
+  dt { font-weight: bold; }
+  .footpara { display: inline; }
+  .footdef  { margin-bottom: 1em; }
+  .figure { padding: 1em; }
+  .figure p { text-align: center; }
+  .equation-container {
+    display: table;
+    text-align: center;
+    width: 100%;
+  }
+  .equation {
+    vertical-align: middle;
+  }
+  .equation-label {
+    display: table-cell;
+    text-align: right;
+    vertical-align: middle;
+  }
+  .inlinetask {
+    padding: 10px;
+    border: 2px solid gray;
+    margin: 10px;
+    background: #ffffcc;
+  }
+  #org-div-home-and-up
+   { text-align: right; font-size: 70%; white-space: nowrap; }
+  textarea { overflow-x: auto; }
+  .linenr { font-size: smaller }
+  .code-highlighted { background-color: #ffff00; }
+  .org-info-js_info-navigation { border-style: none; }
+  #org-info-js_console-label
+    { font-size: 10px; font-weight: bold; white-space: nowrap; }
+  .org-info-js_search-highlight
+    { background-color: #ffff00; color: #000000; font-weight: bold; }
+  .org-svg { width: 90%; }
+</style>
+</head>
+<body>
+<div id="content" class="content">
+<h1 class="title">Tutorial #5 - Let's have a review together</h1>
+<div id="table-of-contents" role="doc-toc">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents" role="doc-toc">
+<ul>
+<li><a href="#s1">1. Introduction</a></li>
+<li><a href="#org1550d6c">2. Language definition</a>
+<ul>
+<li><a href="#org51a9260">2.1. Alphabet, Sentence and Language</a></li>
+<li><a href="#orge7f6c94">2.2. Lexem and Token:</a></li>
+</ul>
+</li>
+<li><a href="#org272bd57">3. Context-Free Grammars, BNF, E-BNF</a>
+<ul>
+<li><a href="#org52a194f">3.1. Ambigious and non-Ambigious grammars:</a></li>
+</ul>
+</li>
+<li><a href="#org2ecb8ca">4. Conclusion</a></li>
+</ul>
+</div>
+</div>
+
+
+<div id="outline-container-s1" class="outline-2">
+<h2 id="s1"><span class="section-number-2">1.</span> Introduction</h2>
+<div class="outline-text-2" id="text-s1">
+<p>
+Today I am going to review some of the topics related to the course. While we
+are doing this, we are also going to solve some examples that may help you
+figure out the kind of questions you may have in your mid-term. Let's start.
+</p>
+</div>
+</div>
+
+<div id="outline-container-org1550d6c" class="outline-2">
+<h2 id="org1550d6c"><span class="section-number-2">2.</span> Language definition</h2>
+<div class="outline-text-2" id="text-2">
+</div>
+<div id="outline-container-org51a9260" class="outline-3">
+<h3 id="org51a9260"><span class="section-number-3">2.1.</span> Alphabet, Sentence and Language</h3>
+<div class="outline-text-3" id="text-2-1">
+<ul class="org-ul">
+<li>An <b>alphabet</b> is finite non-empty set. The element of an alphabet called the
+letters or symbols of the alphabet.</li>
+<li>A <b>sentence</b> is a string of characters over some alphabet.</li>
+<li>A <b>language</b> is a set of sentences.</li>
+</ul>
+
+
+<p>
+Lets have a look at an example:
+</p>
+
+<ul class="org-ul">
+<li>Here is the alphabet for our language:</li>
+</ul>
+
+<div class="org-src-container">
+<pre class="src src-text">A={a b... z A B .. Z 0 ... 9 _}
+</pre>
+</div>
+
+<p>
+This is a possible alphabet for <code>Python</code> programming language.
+</p>
+
+<p>
+Lets give you a definition based on the alphabet:
+</p>
+
+<p>
+digits = (0 | 1 | 2 | 3 | 4 | 5 )*
+words = (a | b | c | d | e | f | g ) +
+pattern =  word ( _ | (digits)*)
+</p>
+
+<p>
+Let's write some valid patterns based on this definition:
+</p>
+
+<ul class="org-ul">
+<li>pattern1 = abz_</li>
+<li>pattern2 = abcd0128</li>
+<li>pattern3 = abc345</li>
+<li>pattern4 = g_</li>
+</ul>
+
+<p>
+Give me one more valid and invalid pattern. Justify your answer:
+</p>
+
+<ul class="org-ul">
+<li>valid pattern :</li>
+<li>in-valid pattern :</li>
+</ul>
+
+
+<div class="org-src-container">
+<pre class="src src-text">A={a b ... z A B ... z 0 ... 9 _ '}
+</pre>
+</div>
+
+<p>
+This is another possible alphabet for <code>Haskell</code> programming language.
+</p>
+
+<p>
+Let's define a different pattern definition:
+</p>
+
+<p>
+digits (1|2| &#x2026; |9)+
+words = (A|B| &#x2026; |Z | ')*
+pattern digits ( ' | (_ words)*)
+</p>
+
+<p>
+Give me some valid and invalid patterns:
+</p>
+
+<ul class="org-ul">
+<li>Valid<sub>pattern1</sub> : 123'</li>
+<li>Valid<sub>pattern2</sub> :</li>
+<li>Valid<sub>pattern3</sub> :</li>
+<li>Valid<sub>pattern4</sub> :</li>
+
+<li>Invalid<sub>pattern1</sub> : 10233<sub>WoRD</sub>'</li>
+<li>Invalid<sub>pattern2</sub> :</li>
+<li>Invalid<sub>pattern3</sub> :</li>
+<li>Invalid<sub>pattern4</sub> :</li>
+</ul>
+
+<p>
+Lets define a regular expression:
+</p>
+
+<p>
+((a|b|c|d|&#x2026;|z|A|B|&#x2026;|Z|0|1|&#x2026;|9|)+(a|b|c|d|&#x2026;|z|A|B|&#x2026;|Z|0|1|&#x2026;|9|_)*(a|b|c|d|&#x2026;|z|A|B|&#x2026;|Z|0|1|&#x2026;|9|)+)@((a|b|&#x2026;|z)+).((a|b|&#x2026;|z)+)
+</p>
+
+<p>
+Let's write down some strings matching the above regular expressions:
+</p>
+
+<ul class="org-ul">
+<li></li>
+
+<li></li>
+
+<li></li>
+</ul>
+
+<p>
+Let's write some strings that do not match the above regular expression:
+</p>
+
+<ul class="org-ul">
+<li></li>
+
+<li></li>
+
+<li></li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-orge7f6c94" class="outline-3">
+<h3 id="orge7f6c94"><span class="section-number-3">2.2.</span> Lexem and Token:</h3>
+<div class="outline-text-3" id="text-2-2">
+<ul class="org-ul">
+<li>A lexeme is the lowest level syntactic unit of a language (*, sum, begin)</li>
+
+<li>A token is a category of lexemes</li>
+</ul>
+
+<p>
+In a practical programming language, there are a very large number of lexemes,
+perhaps even an infinite number. In a practical programming language, there are
+only a small number of tokens.
+</p>
+
+<p>
+Let's have a look at one simple example
+</p>
+
+<div class="org-src-container">
+<pre class="src src-text">while (y  &gt;=  t) y  =  y - 3 ;
+</pre>
+</div>
+
+<p>
+Let's identify the lexems and tokens here:
+</p>
+
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="org-left">Lexem</th>
+<th scope="col" class="org-left">Token</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="org-left">while</td>
+<td class="org-left">WHILE</td>
+</tr>
+</tbody>
+<tbody>
+<tr>
+<td class="org-left">(</td>
+<td class="org-left">LPar</td>
+</tr>
+</tbody>
+<tbody>
+<tr>
+<td class="org-left">y</td>
+<td class="org-left">Identifier</td>
+</tr>
+</tbody>
+<tbody>
+<tr>
+<td class="org-left">&lt;=</td>
+<td class="org-left">Comparison</td>
+</tr>
+</tbody>
+<tbody>
+<tr>
+<td class="org-left">t</td>
+<td class="org-left">Identifier</td>
+</tr>
+</tbody>
+<tbody>
+<tr>
+<td class="org-left">)</td>
+<td class="org-left">Rpar</td>
+</tr>
+</tbody>
+<tbody>
+<tr>
+<td class="org-left">y</td>
+<td class="org-left">Identifier</td>
+</tr>
+</tbody>
+<tbody>
+<tr>
+<td class="org-left">=</td>
+<td class="org-left">Assignment</td>
+</tr>
+</tbody>
+<tbody>
+<tr>
+<td class="org-left">y</td>
+<td class="org-left">Identifier</td>
+</tr>
+</tbody>
+<tbody>
+<tr>
+<td class="org-left">-</td>
+<td class="org-left">Arithmetic</td>
+</tr>
+</tbody>
+<tbody>
+<tr>
+<td class="org-left">3</td>
+<td class="org-left">Integer</td>
+</tr>
+</tbody>
+<tbody>
+<tr>
+<td class="org-left">;</td>
+<td class="org-left">Semicolon</td>
+</tr>
+</tbody>
+</table>
+
+<p>
+As you can see we have an almost unlimited number of lexems while we are going to end
+up with a limited number of lexical categories (Tokens).
+</p>
+
+
+<p>
+Let's look at another example:
+</p>
+
+<div class="org-src-container">
+<pre class="src src-text">A = {t r u e f a l s e u c p d o i h n Z 0 ( ) ;}
+</pre>
+</div>
+
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="org-left">Lexem</th>
+<th scope="col" class="org-left">Token</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="org-left">isZero</td>
+<td class="org-left">IsZero</td>
+</tr>
+</tbody>
+<tbody>
+<tr>
+<td class="org-left">(</td>
+<td class="org-left">LPar</td>
+</tr>
+</tbody>
+<tbody>
+<tr>
+<td class="org-left">predecessor</td>
+<td class="org-left">operator</td>
+</tr>
+</tbody>
+<tbody>
+<tr>
+<td class="org-left">sucessor</td>
+<td class="org-left">operator</td>
+</tr>
+</tbody>
+<tbody>
+<tr>
+<td class="org-left">isZero</td>
+<td class="org-left">operator</td>
+</tr>
+</tbody>
+<tbody>
+<tr>
+<td class="org-left">)</td>
+<td class="org-left">Rpar</td>
+</tr>
+</tbody>
+<tbody>
+<tr>
+<td class="org-left">true</td>
+<td class="org-left">constant</td>
+</tr>
+</tbody>
+<tbody>
+<tr>
+<td class="org-left">false</td>
+<td class="org-left">constant</td>
+</tr>
+</tbody>
+<tbody>
+<tr>
+<td class="org-left">0</td>
+<td class="org-left">Zero</td>
+</tr>
+</tbody>
+<tbody>
+<tr>
+<td class="org-left">if then else</td>
+<td class="org-left">conditional</td>
+</tr>
+</tbody>
+<tbody>
+<tr>
+<td class="org-left">;</td>
+<td class="org-left">EOF</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org272bd57" class="outline-2">
+<h2 id="org272bd57"><span class="section-number-2">3.</span> Context-Free Grammars, BNF, E-BNF</h2>
+<div class="outline-text-2" id="text-3">
+<p>
+In formal language theory, a context-free grammar (CFG) is a formal grammar
+whose production rules are of the form
+</p>
+
+<div class="org-src-container">
+<pre class="src src-text">A -&gt; alpha
+</pre>
+</div>
+
+<p>
+with <b>A</b> as a <b>nont-terminal</b> symbol and <b>alpha</b> as <b>terminal</b> / <b>non-terminal</b>
+/ <b>empty</b> symbols.
+</p>
+
+<p>
+Backus-Naur form (BNF): In BNF, abstractions are used to represent classes of
+syntactic structures&#x2013;they act like syntactic variables (also called nonterminal
+symbols, or just terminals)
+</p>
+
+
+<p>
+Let's have a look at one example:
+</p>
+
+<p>
+Other name for non-terminal symbol is abstractions.
+</p>
+
+<p>
+Abstractions can have more than one RHS
+</p>
+
+<pre class="example">
+&lt;program&gt; → &lt;stmts&gt;
+&lt;stmts&gt; → &lt;stmt&gt; | &lt;stmt&gt; ; &lt;stmts&gt;
+&lt;stmt&gt; → &lt;var&gt; = &lt;expr&gt;
+&lt;var&gt; → a|b|c|d
+&lt;expr&gt; → &lt;term&gt; + &lt;term&gt; | &lt;term&gt; - &lt;term&gt; &lt;term&gt; → &lt;var&gt; | const
+</pre>
+
+<p>
+Can you identify non-terminal and terminal symbols here?
+</p>
+
+<p>
+Let's have a look at another example:
+</p>
+
+<div class="org-src-container">
+<pre class="src src-text">&#10216;H_ID&#10217;  &#8594; &#10216;head&#10217; &#10216;tail&#10217;
+&#10216;head&#10217;  &#8594; &#10216;upper&#10217; | &#10216;lower&#10217;
+&#10216;tail&#10217;  &#8594; &#10216;upper&#10217; | &#10216;lower&#10217; | &#10216;special&#10217; | &#10216;digit&#10217; | &#8217;
+&#10216;lower&#10217; &#8594; a|b|c|d|e|f|g|h|i|j|k|l|m|n|o|p|q|r|s|t|u|v|w|x|y|z|
+&#10216;upper&#10217; &#8594; A|B|C|D|E|F|G|H|I|J|K|L|M|N|O|P|Q|R|S|T|U|V|W |X|Y|Z
+&#10216;digit&#10217; &#8594; 0|1|2|3|4|5|6|7|8|9
+</pre>
+</div>
+
+<p>
+can you identify the terminal and non terminal symbols here:
+</p>
+
+<p>
+Let's define some valid identifiers:
+</p>
+
+<ul class="org-ul">
+<li>Valid<sub>identifier1</sub>: habib1'</li>
+<li>Valid<sub>identifier2</sub>: Habib2'</li>
+<li>Valid<sub>identifier3</sub>: HhAaBbIiBb</li>
+</ul>
+
+<p>
+Let's define some invalid identifiers:
+</p>
+
+<ul class="org-ul">
+<li>Invalid<sub>identifier</sub>: 1Habib</li>
+<li>Invalid<sub>identifier</sub>:</li>
+<li>Invalid<sub>identifier</sub>:</li>
+</ul>
+
+<p>
+Let's have a look at another interesting activity:
+</p>
+
+
+<p>
+<a href="https://www.ics.uci.edu/~pattis/ICS-31/lectures/tokens.pdf">https://www.ics.uci.edu/~pattis/ICS-31/lectures/tokens.pdf</a>
+</p>
+
+
+<p>
+Let's do an fun activity together:
+</p>
+
+
+
+<div id="orga63e61b" class="figure">
+<p><img src="./figures/jude.jpg" alt="jude.jpg" />
+</p>
+</div>
+
+<p>
+Lets write a EBNF grammar for this song:
+</p>
+
+<div class="org-src-container">
+<pre class="src src-text">&#10216;Song&#10217; ::= &#10216;Jude&#10217; { &#10216;Jude&#10217; }
+&#10216;Jude&#10217; ::= hey Jude don&#8217;t &#10216;line 1&#10217; remember to &#10216;line 2&#10217; then you (can start | begin) to make it better
+&#10216;nas&#10217;
+&#10216;line1&#10217; ::= make it bad take a sad song and make it better
+            | be afraid you were made to go out and get her
+            | let me down you have found her, now go and get her
+&#10216;line2&#10217; ::= let her into your heart
+            | let her under your skin
+&#10216;nas&#10217; ::= na {na}
+</pre>
+</div>
+
+<p>
+Now lets have a look at a bit harder case.
+</p>
+
+<ul class="org-ul">
+<li>For loop in C:</li>
+</ul>
+
+<div class="org-src-container">
+<pre class="src src-text">&#10216;C For Loop&#10217; ::= for ( &#10216;initializer&#10217; ; &#10216;conditional&#10217; ; &#10216;update&#10217; ) &#8217;{&#8217; &#10216;Statements&#10217; &#8217;}&#8217;
+</pre>
+</div>
+
+<ul class="org-ul">
+<li>Exercise: Define  EBNF grammar for tuples in <code>Python</code>:</li>
+</ul>
+</div>
+
+
+<div id="outline-container-org52a194f" class="outline-3">
+<h3 id="org52a194f"><span class="section-number-3">3.1.</span> Ambigious and non-Ambigious grammars:</h3>
+<div class="outline-text-3" id="text-3-1">
+<p>
+A grammar is ambiguous if and only if it generates a sentential form that has
+two or more distinct parse trees:
+</p>
+
+<div class="org-src-container">
+<pre class="src src-text">E -&gt; E+E|id
+</pre>
+</div>
+
+
+<div id="org426da89" class="figure">
+<p><img src="./figures/grammertree2.jpeg" alt="grammertree2.jpeg" />
+</p>
+</div>
+
+
+<p>
+Now let's have a look at a bit more different example. See how we could figure
+out if it is ambiguous or not:
+</p>
+
+<pre class="example">
+S -&gt;  if E then S else S
+S -&gt;  begin S L
+S -&gt;  print E
+L -&gt; end
+L -&gt; S L
+E -&gt;  num = num
+</pre>
+
+<p>
+What do you think about this grammar?
+</p>
+
+<ul class="org-ul">
+<li>S expression starts either with an IF, BEGIN, or PRINT token,</li>
+
+<li>L expression start with an END or a SEMICOLON token,</li>
+
+<li>E expression has only one production.</li>
+</ul>
+
+<p>
+What about the following grammar?
+</p>
+
+<div class="org-src-container">
+<pre class="src src-text">E -&gt; E-E | id
+</pre>
+</div>
+
+<p>
+Define some of the strings in the language:
+</p>
+
+<pre class="example">
+{ id, id-id, id-id-id, ….}
+</pre>
+
+
+<p>
+Consider the following string in the language by replacing terminal <code>id</code> with
+<code>3</code>.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-text">3 - 3 - 3 
+</pre>
+</div>
+
+
+<p>
+Here is what we may expect:
+</p>
+
+
+
+<div id="orge99beaf" class="figure">
+<p><img src="./figures/grammertree1.jpeg" alt="grammertree1.jpeg" />
+</p>
+</div>
+
+
+<p>
+How we could make this grammar unambiguous?
+</p>
+
+
+<ol class="org-ol">
+<li>Precedence:</li>
+</ol>
+<p>
+If different operators are used, we will consider the precedence of the
+operators. The three important characteristics are :
+</p>
+
+<ol class="org-ol">
+<li>The level at which the production is present denotes the priority of the
+operator used.</li>
+<li>The production at higher levels will have operators with less priority. In
+the parse tree, the nodes which are at top levels or close to the root
+node will contain the lower priority operators.</li>
+<li>The production at lower levels will have operators with higher priority.
+In the parse tree, the nodes which are at lower levels or close to the
+leaf nodes will contain the higher-priority operators.</li>
+</ol>
+<ol class="org-ol">
+<li>Associativity:</li>
+</ol>
+<p>
+If the same precedence operators are in production, then we will have to
+consider the associativity.
+</p>
+
+<ol class="org-ol">
+<li>If the associativity is left to right, then we have to prompt a left
+recursion in the production. The parse tree will also be left recursive
+and grow on the left side.</li>
+<li>+, -, *, / are left-associative operators.</li>
+<li>If the associativity is right to left, then we have to prompt the right
+recursion in the productions. The parse tree will also be right recursive
+and grow on the right side.</li>
+<li>^ is a right associative operator.</li>
+</ol>
+
+
+<ul class="org-ul">
+<li>Make the grammar left recursive:
+
+<ul class="org-ul">
+<li>Replace the most non-terminal E in the RHS with another random variable.</li>
+</ul></li>
+</ul>
+
+<div class="org-src-container">
+<pre class="src src-text">E -&gt; E &#8211; P | P
+P -&gt; id
+</pre>
+</div>
+
+
+<div id="org5925b47" class="figure">
+<p><img src="./figures/f1.png" alt="f1.png" />
+</p>
+</div>
+
+
+<div id="orgacec605" class="figure">
+<p><img src="./figures/f2.png" alt="f2.png" />
+</p>
+</div>
+
+
+<ul class="org-ul">
+<li>Consider the following grammar:</li>
+</ul>
+
+<div class="org-src-container">
+<pre class="src src-text">E -&gt; E + E | E * E | id
+</pre>
+</div>
+
+<p>
+Is this ambiguous? How we could prove that? If it is, how we could show it is
+not
+</p>
+
+<ul class="org-ul">
+<li>example: 3+2*5</li>
+</ul>
+
+
+<div class="org-src-container">
+<pre class="src src-text">E -&gt; E + P           // + is at higher level and left associative
+E -&gt; P 
+P -&gt; P * Q          // * is at lower level and left associative
+P -&gt; Q  
+Q -&gt; id
+</pre>
+</div>
+
+
+<p>
+What about this example?
+</p>
+
+
+<div class="org-src-container">
+<pre class="src src-text">E -&gt; T + E
+E -&gt; T
+T -&gt; int
+T -&gt; int * T
+T -&gt; ( E )
+</pre>
+</div>
+
+<ul class="org-ul">
+<li>E starts with T or T + E</li>
+<li><p>
+T starts with int or int * T or (E)
+</p>
+
+<p>
+Definitely, this is not predictive grammar.
+</p>
+
+<p>
+How could we make it predicitve?
+</p>
+
+<p>
+Let's add up some random non-terminals to the grammar to make it predictive.
+</p></li>
+</ul>
+
+<div class="org-src-container">
+<pre class="src src-text">E -&gt; T X
+X -&gt; + E 
+X -&gt; epsilon
+T -&gt; (E)
+T -&gt; int Y
+Y -&gt; * T
+Y -&gt; epsilon
+</pre>
+</div>
+
+<ul class="org-ul">
+<li>Check all the repetitive terminal symbols</li>
+<li>Make sure for each non-terminal is either only one rule or every rule starts
+with a terminal or epsilon.</li>
+<li>Maker sure your parse tree always be left recursive.</li>
+<li>More you expand your grammar, you can make it more predictive.</li>
+</ul>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org2ecb8ca" class="outline-2">
+<h2 id="org2ecb8ca"><span class="section-number-2">4.</span> Conclusion</h2>
+<div class="outline-text-2" id="text-4">
+<ul class="org-ul">
+<li>It is important for you to read the material for the first four chapters of the
+tex book and be familiar with what is going on with assignment number one.</li>
+
+<li>Remember to review all the material related to tokens, lexems, lexical and
+syntax analysis.</li>
+
+<li>Very important to understand how BNF and EBNF are working and how to generate
+strings based on them. You also need to be able to distinguish the valid and
+invalid strings.</li>
+
+<li>Try to understand how to create a parse tree for a derivation of a grammar and
+how to figure out if it is ambiguous or not. You should be able to figure out
+to solve the ambiguity it is possible.</li>
+
+<li>You should have access to the solution of Assignment number 1. Try to
+understand how each of the hleper functions are working and how you could use
+them if it is necessary.</li>
+</ul>
+</div>
+</div>
+</div>
+<div id="postamble" class="status">
+<p class="date">Date: 2022-10-31 Mon 00:00</p>
+<p class="author">Author: Habib Ghaffari</p>
+<p class="date">Created: 2022-11-01 Tue 12:13</p>
+<p class="validation"><a href="https://validator.w3.org/check?uri=referer">Validate</a></p>
+</div>
+</body>
+</html>

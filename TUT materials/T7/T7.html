@@ -1,0 +1,1130 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<!-- 2022-11-15 Tue 14:33 -->
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Tutorial #7 - Let's practice a bit more</title>
+<meta name="author" content="Habib Ghaffari" />
+<meta name="generator" content="Org Mode" />
+<style>
+  #content { max-width: 60em; margin: auto; }
+  .title  { text-align: center;
+             margin-bottom: .2em; }
+  .subtitle { text-align: center;
+              font-size: medium;
+              font-weight: bold;
+              margin-top:0; }
+  .todo   { font-family: monospace; color: red; }
+  .done   { font-family: monospace; color: green; }
+  .priority { font-family: monospace; color: orange; }
+  .tag    { background-color: #eee; font-family: monospace;
+            padding: 2px; font-size: 80%; font-weight: normal; }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .org-right  { margin-left: auto; margin-right: 0px;  text-align: right; }
+  .org-left   { margin-left: 0px;  margin-right: auto; text-align: left; }
+  .org-center { margin-left: auto; margin-right: auto; text-align: center; }
+  .underline { text-decoration: underline; }
+  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
+  p.verse { margin-left: 3%; }
+  pre {
+    border: 1px solid #e6e6e6;
+    border-radius: 3px;
+    background-color: #f2f2f2;
+    padding: 8pt;
+    font-family: monospace;
+    overflow: auto;
+    margin: 1.2em;
+  }
+  pre.src {
+    position: relative;
+    overflow: auto;
+  }
+  pre.src:before {
+    display: none;
+    position: absolute;
+    top: -8px;
+    right: 12px;
+    padding: 3px;
+    color: #555;
+    background-color: #f2f2f299;
+  }
+  pre.src:hover:before { display: inline; margin-top: 14px;}
+  /* Languages per Org manual */
+  pre.src-asymptote:before { content: 'Asymptote'; }
+  pre.src-awk:before { content: 'Awk'; }
+  pre.src-authinfo::before { content: 'Authinfo'; }
+  pre.src-C:before { content: 'C'; }
+  /* pre.src-C++ doesn't work in CSS */
+  pre.src-clojure:before { content: 'Clojure'; }
+  pre.src-css:before { content: 'CSS'; }
+  pre.src-D:before { content: 'D'; }
+  pre.src-ditaa:before { content: 'ditaa'; }
+  pre.src-dot:before { content: 'Graphviz'; }
+  pre.src-calc:before { content: 'Emacs Calc'; }
+  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
+  pre.src-fortran:before { content: 'Fortran'; }
+  pre.src-gnuplot:before { content: 'gnuplot'; }
+  pre.src-haskell:before { content: 'Haskell'; }
+  pre.src-hledger:before { content: 'hledger'; }
+  pre.src-java:before { content: 'Java'; }
+  pre.src-js:before { content: 'Javascript'; }
+  pre.src-latex:before { content: 'LaTeX'; }
+  pre.src-ledger:before { content: 'Ledger'; }
+  pre.src-lisp:before { content: 'Lisp'; }
+  pre.src-lilypond:before { content: 'Lilypond'; }
+  pre.src-lua:before { content: 'Lua'; }
+  pre.src-matlab:before { content: 'MATLAB'; }
+  pre.src-mscgen:before { content: 'Mscgen'; }
+  pre.src-ocaml:before { content: 'Objective Caml'; }
+  pre.src-octave:before { content: 'Octave'; }
+  pre.src-org:before { content: 'Org mode'; }
+  pre.src-oz:before { content: 'OZ'; }
+  pre.src-plantuml:before { content: 'Plantuml'; }
+  pre.src-processing:before { content: 'Processing.js'; }
+  pre.src-python:before { content: 'Python'; }
+  pre.src-R:before { content: 'R'; }
+  pre.src-ruby:before { content: 'Ruby'; }
+  pre.src-sass:before { content: 'Sass'; }
+  pre.src-scheme:before { content: 'Scheme'; }
+  pre.src-screen:before { content: 'Gnu Screen'; }
+  pre.src-sed:before { content: 'Sed'; }
+  pre.src-sh:before { content: 'shell'; }
+  pre.src-sql:before { content: 'SQL'; }
+  pre.src-sqlite:before { content: 'SQLite'; }
+  /* additional languages in org.el's org-babel-load-languages alist */
+  pre.src-forth:before { content: 'Forth'; }
+  pre.src-io:before { content: 'IO'; }
+  pre.src-J:before { content: 'J'; }
+  pre.src-makefile:before { content: 'Makefile'; }
+  pre.src-maxima:before { content: 'Maxima'; }
+  pre.src-perl:before { content: 'Perl'; }
+  pre.src-picolisp:before { content: 'Pico Lisp'; }
+  pre.src-scala:before { content: 'Scala'; }
+  pre.src-shell:before { content: 'Shell Script'; }
+  pre.src-ebnf2ps:before { content: 'ebfn2ps'; }
+  /* additional language identifiers per "defun org-babel-execute"
+       in ob-*.el */
+  pre.src-cpp:before  { content: 'C++'; }
+  pre.src-abc:before  { content: 'ABC'; }
+  pre.src-coq:before  { content: 'Coq'; }
+  pre.src-groovy:before  { content: 'Groovy'; }
+  /* additional language identifiers from org-babel-shell-names in
+     ob-shell.el: ob-shell is the only babel language using a lambda to put
+     the execution function name together. */
+  pre.src-bash:before  { content: 'bash'; }
+  pre.src-csh:before  { content: 'csh'; }
+  pre.src-ash:before  { content: 'ash'; }
+  pre.src-dash:before  { content: 'dash'; }
+  pre.src-ksh:before  { content: 'ksh'; }
+  pre.src-mksh:before  { content: 'mksh'; }
+  pre.src-posh:before  { content: 'posh'; }
+  /* Additional Emacs modes also supported by the LaTeX listings package */
+  pre.src-ada:before { content: 'Ada'; }
+  pre.src-asm:before { content: 'Assembler'; }
+  pre.src-caml:before { content: 'Caml'; }
+  pre.src-delphi:before { content: 'Delphi'; }
+  pre.src-html:before { content: 'HTML'; }
+  pre.src-idl:before { content: 'IDL'; }
+  pre.src-mercury:before { content: 'Mercury'; }
+  pre.src-metapost:before { content: 'MetaPost'; }
+  pre.src-modula-2:before { content: 'Modula-2'; }
+  pre.src-pascal:before { content: 'Pascal'; }
+  pre.src-ps:before { content: 'PostScript'; }
+  pre.src-prolog:before { content: 'Prolog'; }
+  pre.src-simula:before { content: 'Simula'; }
+  pre.src-tcl:before { content: 'tcl'; }
+  pre.src-tex:before { content: 'TeX'; }
+  pre.src-plain-tex:before { content: 'Plain TeX'; }
+  pre.src-verilog:before { content: 'Verilog'; }
+  pre.src-vhdl:before { content: 'VHDL'; }
+  pre.src-xml:before { content: 'XML'; }
+  pre.src-nxml:before { content: 'XML'; }
+  /* add a generic configuration mode; LaTeX export needs an additional
+     (add-to-list 'org-latex-listings-langs '(conf " ")) in .emacs */
+  pre.src-conf:before { content: 'Configuration File'; }
+
+  table { border-collapse:collapse; }
+  caption.t-above { caption-side: top; }
+  caption.t-bottom { caption-side: bottom; }
+  td, th { vertical-align:top;  }
+  th.org-right  { text-align: center;  }
+  th.org-left   { text-align: center;   }
+  th.org-center { text-align: center; }
+  td.org-right  { text-align: right;  }
+  td.org-left   { text-align: left;   }
+  td.org-center { text-align: center; }
+  dt { font-weight: bold; }
+  .footpara { display: inline; }
+  .footdef  { margin-bottom: 1em; }
+  .figure { padding: 1em; }
+  .figure p { text-align: center; }
+  .equation-container {
+    display: table;
+    text-align: center;
+    width: 100%;
+  }
+  .equation {
+    vertical-align: middle;
+  }
+  .equation-label {
+    display: table-cell;
+    text-align: right;
+    vertical-align: middle;
+  }
+  .inlinetask {
+    padding: 10px;
+    border: 2px solid gray;
+    margin: 10px;
+    background: #ffffcc;
+  }
+  #org-div-home-and-up
+   { text-align: right; font-size: 70%; white-space: nowrap; }
+  textarea { overflow-x: auto; }
+  .linenr { font-size: smaller }
+  .code-highlighted { background-color: #ffff00; }
+  .org-info-js_info-navigation { border-style: none; }
+  #org-info-js_console-label
+    { font-size: 10px; font-weight: bold; white-space: nowrap; }
+  .org-info-js_search-highlight
+    { background-color: #ffff00; color: #000000; font-weight: bold; }
+  .org-svg { width: 90%; }
+</style>
+</head>
+<body>
+<div id="content" class="content">
+<h1 class="title">Tutorial #7 - Let's practice a bit more</h1>
+<div id="table-of-contents" role="doc-toc">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents" role="doc-toc">
+<ul>
+<li><a href="#org73d8d6c">1. Introduction</a></li>
+<li><a href="#org3835820">2. Questions:</a></li>
+<li><a href="#org6e4ade8">3. Coding Together</a>
+<ul>
+<li><a href="#org2243a91">3.1. Creating an Object in Python</a></li>
+<li><a href="#org5eb8dd0">3.2. Constructors in Python</a></li>
+</ul>
+</li>
+<li><a href="#org48ea59a">4. Exercises</a></li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-org73d8d6c" class="outline-2">
+<h2 id="org73d8d6c"><span class="section-number-2">1.</span> Introduction</h2>
+<div class="outline-text-2" id="text-1">
+<p>
+In the first part of this tutorial, we will work on the exercises from the last
+tutorial. I will explain how you need to work on each question and justify my
+solutions.
+</p>
+
+<p>
+In the second part, we will have an introduction to python classes, how we can
+define them and how they work. I will also introduce python constructors with
+some examples related to <code>__init__</code> and <code>__eq__</code>, which are two handy constructor
+methods.
+</p>
+</div>
+</div>
+
+<div id="outline-container-org3835820" class="outline-2">
+<h2 id="org3835820"><span class="section-number-2">2.</span> Questions:</h2>
+<div class="outline-text-2" id="text-2">
+<ol class="org-ol">
+<li>Consider the following JavaScript skeletal program:</li>
+</ol>
+
+<div class="org-src-container">
+<pre class="src src-javascript">  <span style="color: #2aa1ae; background-color: #292e34;">// </span><span style="color: #2aa1ae; background-color: #292e34;">The main program</span>
+  <span style="color: #4f97d7; font-weight: bold;">var</span> <span style="color: #7590db;">x</span>;
+
+  <span style="color: #2aa1ae; background-color: #292e34;">// </span><span style="color: #2aa1ae; background-color: #292e34;">Defined inside main</span>
+  <span style="color: #4f97d7; font-weight: bold;">function</span> <span style="color: #bc6ec5; font-weight: bold;">sub1</span><span style="color: #4f97d7;">(){</span>
+      <span style="color: #4f97d7; font-weight: bold;">var</span> <span style="color: #7590db;">x</span>;
+      <span style="color: #2aa1ae; background-color: #292e34;">// </span><span style="color: #2aa1ae; background-color: #292e34;">Defined inside sub1</span>
+      <span style="color: #4f97d7; font-weight: bold;">function</span> <span style="color: #bc6ec5; font-weight: bold;">sub2</span><span style="color: #bc6ec5;">(){</span>
+          . . .
+      <span style="color: #bc6ec5;">}</span>
+
+  <span style="color: #4f97d7;">}</span> 
+<span style="color: #2aa1ae; background-color: #292e34;">// </span><span style="color: #2aa1ae; background-color: #292e34;">Defined inside main</span>
+<span style="color: #4f97d7; font-weight: bold;">function</span> <span style="color: #bc6ec5; font-weight: bold;">sub3</span><span style="color: #4f97d7;">(){</span>
+  . . .
+ <span style="color: #4f97d7;">}</span>
+</pre>
+</div>
+
+<p>
+Assume that the execution of this program is in the following unit order:
+</p>
+
+<ul class="org-ul">
+<li><code>main</code> calls <code>sub1</code></li>
+<li><code>sub1</code> calls <code>sub2</code></li>
+<li><code>sub2</code> calls <code>sub3</code></li>
+</ul>
+
+<p>
+Assuming static scoping, in the following, which declaration of <code>x</code> is the
+correct one for a reference to <code>x</code>?
+</p>
+
+<ul class="org-ul">
+<li><p>
+Since the scope is static. The place we deifne a function is become important.
+Becuase it is going to show us the refernce to the <code>x</code>
+</p>
+
+<p>
+i. sub1 (Because in static scope the search is going to happen locally first.)
+ii. sub1 (There is not local definition of x inside sub2, but sub2 degfined
+ inside sub1 which has a local definiton for x)
+iii. main (We defined the function sub3 on main so the reference for x is going
+ to be main)
+</p></li>
+</ul>
+
+<p>
+Repeat part a, but assume dynamic scoping:
+</p>
+
+<ul class="org-ul">
+<li><p>
+In dynamic scope the sequence of calling functions is important.
+</p>
+
+<p>
+i. sub1
+ii. sub1
+iii. sub1
+</p></li>
+
+<li>Let's write a piece of code in <code>JavaScript</code>:</li>
+</ul>
+
+<div class="org-src-container">
+<pre class="src src-javascript"><span style="color: #4f97d7; font-weight: bold;">var</span> <span style="color: #7590db;">x</span>;
+<span style="color: #2aa1ae; background-color: #292e34;">// </span><span style="color: #2aa1ae; background-color: #292e34;">This is inside main ( The reference here still main)</span>
+<span style="color: #4f97d7; font-weight: bold;">function</span> <span style="color: #bc6ec5; font-weight: bold;">sub1</span><span style="color: #4f97d7;">()</span> <span style="color: #4f97d7;">{</span>
+ document.write<span style="color: #bc6ec5;">(</span><span style="color: #2d9574;">"x = "</span> + x + <span style="color: #2d9574;">""</span><span style="color: #bc6ec5;">)</span>;
+<span style="color: #4f97d7;">}</span>
+<span style="color: #2aa1ae; background-color: #292e34;">// </span><span style="color: #2aa1ae; background-color: #292e34;">this is inside main</span>
+<span style="color: #4f97d7; font-weight: bold;">function</span> <span style="color: #bc6ec5; font-weight: bold;">sub2</span><span style="color: #4f97d7;">()</span> <span style="color: #4f97d7;">{</span>
+ <span style="color: #4f97d7; font-weight: bold;">var</span> <span style="color: #7590db;">x</span>;
+ <span style="color: #2aa1ae; background-color: #292e34;">// </span><span style="color: #2aa1ae; background-color: #292e34;">this is inside sub 2</span>
+ x = <span style="color: #a45bad;">10</span>;
+ sub1<span style="color: #bc6ec5;">()</span>;
+<span style="color: #4f97d7;">}</span>
+x = <span style="color: #a45bad;">5</span>;
+sub2<span style="color: #4f97d7;">()</span>;
+</pre>
+</div>
+
+<ul class="org-ul">
+<li><p>
+What value of <code>x</code> is displayed if we use static-scope rules? Why?
+</p>
+
+<p>
+x = 5 (The scope is static. The place we define sub1 becomes important)
+</p></li>
+
+<li><p>
+What if we use dynamic-scope rules? Why?
+</p>
+
+<p>
+x = 10 (We find the refernce based on the sequence of calling fucntions)
+</p></li>
+
+<li>Let's write another piece of code in <code>JavaScript</code>:</li>
+</ul>
+
+<div class="org-src-container">
+<pre class="src src-javascript"><span style="color: #4f97d7; font-weight: bold;">var</span> <span style="color: #7590db;">x</span>, <span style="color: #7590db;">y</span>, <span style="color: #7590db;">z</span>;
+<span style="color: #4f97d7; font-weight: bold;">function</span> <span style="color: #bc6ec5; font-weight: bold;">sub1</span><span style="color: #4f97d7;">()</span> <span style="color: #4f97d7;">{</span>
+<span style="color: #4f97d7; font-weight: bold;">var</span> <span style="color: #7590db;">a</span>, <span style="color: #7590db;">y</span>, <span style="color: #7590db;">z</span>;
+  <span style="color: #4f97d7; font-weight: bold;">function</span> <span style="color: #bc6ec5; font-weight: bold;">sub2</span><span style="color: #bc6ec5;">()</span> <span style="color: #bc6ec5;">{</span>
+   <span style="color: #4f97d7; font-weight: bold;">var</span> <span style="color: #7590db;">a</span>, <span style="color: #7590db;">b</span>, <span style="color: #7590db;">z</span>;
+   . . .
+  <span style="color: #bc6ec5;">}</span>
+  . . .
+<span style="color: #4f97d7;">}</span>
+<span style="color: #4f97d7; font-weight: bold;">function</span> <span style="color: #bc6ec5; font-weight: bold;">sub3</span><span style="color: #4f97d7;">()</span> <span style="color: #4f97d7;">{</span>
+  <span style="color: #4f97d7; font-weight: bold;">var</span> <span style="color: #7590db;">a</span>, <span style="color: #7590db;">x</span>, <span style="color: #7590db;">w</span>;
+  . . .
+<span style="color: #4f97d7;">}</span>
+</pre>
+</div>
+
+<p>
+List all the variables, along with the program units where they are declared,
+that are visible in the bodies of <code>sub1</code>, <code>sub2</code>, and <code>sub3</code>, assuming
+static scoping is used. Justify your answer:
+</p>
+
+<ul class="org-ul">
+<li>In sub1:</li>
+
+<li>In sub2:</li>
+
+<li>In sub3:</li>
+</ul>
+
+
+<ol class="org-ol">
+<li>Consider the following <code>C</code> program:
+
+<ul class="org-ul">
+<li>C is a static programing language.</li>
+</ul></li>
+</ol>
+
+<div class="org-src-container">
+<pre class="src src-c"><span style="color: #ce537a; font-weight: bold;">void</span> <span style="color: #bc6ec5; font-weight: bold;">fun</span><span style="color: #4f97d7;">(</span><span style="color: #ce537a; font-weight: bold;">void</span><span style="color: #4f97d7;">)</span> <span style="color: #4f97d7;">{</span>
+<span style="color: #ce537a; font-weight: bold;">int</span> <span style="color: #7590db;">a</span>, <span style="color: #7590db;">b</span>, <span style="color: #7590db;">c</span>; <span style="color: #2aa1ae; background-color: #292e34;">/* </span><span style="color: #2aa1ae; background-color: #292e34;">definition 1</span><span style="color: #2aa1ae; background-color: #292e34;"> */</span>
+. . .
+<span style="color: #4f97d7; font-weight: bold;">while</span> <span style="color: #bc6ec5;">(</span>. . .<span style="color: #bc6ec5;">)</span> <span style="color: #bc6ec5;">{</span>
+<span style="color: #ce537a; font-weight: bold;">int</span> <span style="color: #7590db;">b</span>, <span style="color: #7590db;">c</span>, <span style="color: #7590db;">d</span>; <span style="color: #2aa1ae; background-color: #292e34;">/*</span><span style="color: #2aa1ae; background-color: #292e34;">definition 2</span><span style="color: #2aa1ae; background-color: #292e34;"> */</span>
+. . . &lt;------------- <span style="color: #a45bad;">1</span>
+  <span style="color: #4f97d7; font-weight: bold;">while</span> <span style="color: #2d9574;">(</span>. . .<span style="color: #2d9574;">)</span> <span style="color: #2d9574;">{</span>
+    <span style="color: #2aa1ae; background-color: #292e34;">/* </span><span style="color: #2aa1ae; background-color: #292e34;">Whatever happening inside a block is going to stay inside it.</span>
+<span style="color: #2aa1ae; background-color: #292e34;">    int c, d, e; /* definition 3</span><span style="color: #2aa1ae; background-color: #292e34;"> */</span>
+    . . . &lt;------------- <span style="color: #a45bad;">2</span>
+  <span style="color: #2d9574;">}</span>
+. . . &lt;-------------- <span style="color: #a45bad;">3</span>
+<span style="color: #bc6ec5;">}</span>
+. . . &lt;---------------- <span style="color: #a45bad;">4</span>
+<span style="color: #4f97d7;">}</span>
+</pre>
+</div>
+
+<p>
+For each of the four marked points in this function, list each visible variable,
+along with the number of the definition statement that defines it. Justify your
+answer?
+</p>
+
+
+<ul class="org-ul">
+<li>Point 1: (Because b c d are already defined localy in <code>fun</code>, so when we are
+redefing the inside <code>while</code> block. The local definitions of the variables
+going to be hidden.
+a 1
+b 2
+c 2
+d 2</li>
+<li>Point 2:
+a 1
+b 2
+c 3
+d 3
+e 3</li>
+<li>Point 3:
+<ul class="org-ul">
+<li>(Exactly like point1)</li>
+</ul></li>
+<li>Pint 4:
+<ul class="org-ul">
+<li>a 1 b 1 c 1</li>
+</ul></li>
+</ul>
+
+
+<ol class="org-ol">
+<li>Consider the following skeletal <code>C</code> program:</li>
+</ol>
+
+<div class="org-src-container">
+<pre class="src src-c"><span style="color: #ce537a; font-weight: bold;">void</span> <span style="color: #bc6ec5; font-weight: bold;">fun1</span><span style="color: #4f97d7;">(</span><span style="color: #ce537a; font-weight: bold;">void</span><span style="color: #4f97d7;">)</span>; <span style="color: #2aa1ae; background-color: #292e34;">/* </span><span style="color: #2aa1ae; background-color: #292e34;">prototype</span><span style="color: #2aa1ae; background-color: #292e34;"> */</span>
+<span style="color: #ce537a; font-weight: bold;">void</span> <span style="color: #bc6ec5; font-weight: bold;">fun2</span><span style="color: #4f97d7;">(</span><span style="color: #ce537a; font-weight: bold;">void</span><span style="color: #4f97d7;">)</span>; <span style="color: #2aa1ae; background-color: #292e34;">/* </span><span style="color: #2aa1ae; background-color: #292e34;">prototype</span><span style="color: #2aa1ae; background-color: #292e34;"> */</span>
+<span style="color: #ce537a; font-weight: bold;">void</span> <span style="color: #bc6ec5; font-weight: bold;">fun3</span><span style="color: #4f97d7;">(</span><span style="color: #ce537a; font-weight: bold;">void</span><span style="color: #4f97d7;">)</span>; <span style="color: #2aa1ae; background-color: #292e34;">/* </span><span style="color: #2aa1ae; background-color: #292e34;">prototype</span><span style="color: #2aa1ae; background-color: #292e34;"> */</span>
+<span style="color: #ce537a; font-weight: bold;">void</span> <span style="color: #bc6ec5; font-weight: bold;">main</span><span style="color: #4f97d7;">()</span> <span style="color: #4f97d7;">{</span>
+ <span style="color: #ce537a; font-weight: bold;">int</span> <span style="color: #7590db;">a</span>, <span style="color: #7590db;">b</span>, <span style="color: #7590db;">c</span>;
+ . . .
+<span style="color: #4f97d7;">}</span>
+<span style="color: #ce537a; font-weight: bold;">void</span> <span style="color: #bc6ec5; font-weight: bold;">fun1</span><span style="color: #4f97d7;">(</span><span style="color: #ce537a; font-weight: bold;">void</span><span style="color: #4f97d7;">)</span> <span style="color: #4f97d7;">{</span>
+ <span style="color: #ce537a; font-weight: bold;">int</span> <span style="color: #7590db;">b</span>, <span style="color: #7590db;">c</span>, <span style="color: #7590db;">d</span>;
+ . . .
+<span style="color: #4f97d7;">}</span>
+<span style="color: #ce537a; font-weight: bold;">void</span> <span style="color: #bc6ec5; font-weight: bold;">fun2</span><span style="color: #4f97d7;">(</span><span style="color: #ce537a; font-weight: bold;">void</span><span style="color: #4f97d7;">)</span> <span style="color: #4f97d7;">{</span>
+ <span style="color: #ce537a; font-weight: bold;">int</span> <span style="color: #7590db;">c</span>, <span style="color: #7590db;">d</span>, <span style="color: #7590db;">e</span>;
+ . . .
+<span style="color: #4f97d7;">}</span>
+<span style="color: #ce537a; font-weight: bold;">void</span> <span style="color: #bc6ec5; font-weight: bold;">fun3</span><span style="color: #4f97d7;">(</span><span style="color: #ce537a; font-weight: bold;">void</span><span style="color: #4f97d7;">)</span> <span style="color: #4f97d7;">{</span>
+ <span style="color: #ce537a; font-weight: bold;">int</span> <span style="color: #7590db;">d</span>, <span style="color: #7590db;">e</span>, <span style="color: #7590db;">f</span>;
+ . . .
+<span style="color: #4f97d7;">}</span>
+</pre>
+</div>
+
+<p>
+Given the following calling sequences and assuming that dynamic scoping is used,
+what variables are visible during execution of the last function called? Include
+with each visible variable the name of the function in which it was defined.
+Justify your answer?
+</p>
+
+<p>
+(Sequence of function call)
+</p>
+
+<p>
+a. <code>main</code> calls <code>fun1</code>; <code>fun1</code> calls <code>fun2</code>; <code>fun2</code> calls <code>fun3</code>.
+b. <code>main</code> calls <code>fun1</code>; <code>fun1</code> calls <code>fun3</code>.
+c. <code>main</code> calls <code>fun2</code>; <code>fun2</code> calls <code>fun3</code>; <code>fun3</code> calls <code>fun1</code>.
+d. <code>main</code> calls <code>fun3</code>; <code>fun3</code> calls <code>fun1</code>.
+e. <code>main</code> calls <code>fun1</code>; <code>fun1</code> calls <code>fun3</code>; <code>fun3</code> calls <code>fun2</code>.
+f. <code>main</code> calls <code>fun3</code>; <code>fun3</code> calls <code>fun2</code>; <code>fun2</code> calls <code>fun1</code>.
+</p>
+
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="org-left">Question</th>
+<th scope="col" class="org-left">Variables</th>
+<th scope="col" class="org-left">Where Declared</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="org-left">a)</td>
+<td class="org-left">d e f</td>
+<td class="org-left">fun3</td>
+</tr>
+
+<tr>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">c</td>
+<td class="org-left">fun2</td>
+</tr>
+
+<tr>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">b</td>
+<td class="org-left">fun1</td>
+</tr>
+
+<tr>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">a</td>
+<td class="org-left">main</td>
+</tr>
+</tbody>
+<tbody>
+<tr>
+<td class="org-left">b)</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+</tbody>
+<tbody>
+<tr>
+<td class="org-left">c)</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+</tbody>
+<tbody>
+<tr>
+<td class="org-left">d)</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+</tbody>
+<tbody>
+<tr>
+<td class="org-left">e)</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+</tbody>
+<tbody>
+<tr>
+<td class="org-left">f)</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+</tbody>
+</table>
+
+<ol class="org-ol">
+<li>Consider the following program, written in <code>JavaScript</code>-like</li>
+</ol>
+<p>
+syntax:
+</p>
+
+<div class="org-src-container">
+<pre class="src src-javascript"><span style="color: #2aa1ae; background-color: #292e34;">// </span><span style="color: #2aa1ae; background-color: #292e34;">main program</span>
+<span style="color: #4f97d7; font-weight: bold;">var</span> <span style="color: #7590db;">x</span>, <span style="color: #7590db;">y</span>, <span style="color: #7590db;">z</span>;
+<span style="color: #4f97d7; font-weight: bold;">function</span> <span style="color: #bc6ec5; font-weight: bold;">sub1</span><span style="color: #4f97d7;">()</span> <span style="color: #4f97d7;">{</span>
+<span style="color: #4f97d7; font-weight: bold;">var</span> <span style="color: #7590db;">a</span>, <span style="color: #7590db;">y</span>, <span style="color: #7590db;">z</span>;
+. . .
+<span style="color: #4f97d7;">}</span>
+<span style="color: #4f97d7; font-weight: bold;">function</span> <span style="color: #bc6ec5; font-weight: bold;">sub2</span><span style="color: #4f97d7;">()</span> <span style="color: #4f97d7;">{</span>
+<span style="color: #4f97d7; font-weight: bold;">var</span> <span style="color: #7590db;">a</span>, <span style="color: #7590db;">b</span>, <span style="color: #7590db;">z</span>;
+. . .
+<span style="color: #4f97d7;">}</span>
+<span style="color: #4f97d7; font-weight: bold;">function</span> <span style="color: #bc6ec5; font-weight: bold;">sub3</span><span style="color: #4f97d7;">()</span> <span style="color: #4f97d7;">{</span>
+<span style="color: #4f97d7; font-weight: bold;">var</span> <span style="color: #7590db;">a</span>, <span style="color: #7590db;">x</span>, <span style="color: #7590db;">w</span>;
+. . .
+<span style="color: #4f97d7;">}</span>  
+</pre>
+</div>
+
+
+<p>
+Given the following calling sequences and assuming that dynamic scoping
+is used, what variables are visible during execution of the last subprogram
+activated? Include with each visible variable the name of the unit
+where it is declared.
+</p>
+
+<p>
+a. <code>main</code> calls <code>sub1</code>; <code>sub1</code> calls <code>sub2</code>; <code>sub2</code> calls <code>sub3</code>.
+b. <code>main</code> calls <code>sub1</code>; <code>sub1</code> calls <code>sub3</code>.
+c. <code>main</code> calls <code>sub2</code>; <code>sub2</code> calls <code>sub3</code>; <code>sub3</code> calls <code>sub1</code>.
+d. <code>main</code> calls <code>sub3</code>; <code>sub3</code> calls <code>sub1</code>.
+e. <code>main</code> calls <code>sub1</code>; <code>sub1</code> calls <code>sub3</code>; <code>sub3</code> calls <code>sub2</code>.
+f. <code>main</code> calls <code>sub3</code>; <code>sub3</code> calls <code>sub2</code>; <code>sub2</code> calls <code>sub1</code>.
+</p>
+
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="org-left">Question</th>
+<th scope="col" class="org-left">Variables</th>
+<th scope="col" class="org-left">Where Declared</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="org-left">a)</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+</tbody>
+<tbody>
+<tr>
+<td class="org-left">b)</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+</tbody>
+<tbody>
+<tr>
+<td class="org-left">c)</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+</tbody>
+<tbody>
+<tr>
+<td class="org-left">d)</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+</tbody>
+<tbody>
+<tr>
+<td class="org-left">e)</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+</tbody>
+<tbody>
+<tr>
+<td class="org-left">f)</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+
+
+<div id="outline-container-org6e4ade8" class="outline-2">
+<h2 id="org6e4ade8"><span class="section-number-2">3.</span> Coding Together</h2>
+<div class="outline-text-2" id="text-3">
+<p>
+<code>Python</code> is an object-oriented programming language. Unlike procedure-oriented
+programming, where the main emphasis is on functions, object-oriented
+programming stresses on objects.
+</p>
+
+<p>
+Like function, definitions begin with the <code>def</code> keyword in Python, class
+definitions begin with a class keyword. The first string inside the class is
+called docstring and has a brief description of the class. Although not
+mandatory, this is highly recommended. Here is a simple class definition:
+</p>
+
+<div class="org-src-container">
+<pre class="src src-python"><span style="color: #4f97d7; font-weight: bold;">class</span> <span style="color: #ce537a; font-weight: bold;">MyNewClass</span>:
+    <span style="color: #9f8766;">'''This is a docstring. I have created a new class'''</span>
+    <span style="color: #4f97d7; font-weight: bold;">pass</span>
+</pre>
+</div>
+
+<p>
+A class creates a new local namespace where all its attributes are defined.
+Attributes may be data or functions. There are also special attributes in it
+that begin with double underscores <code>_~</code>. For example, <code>__doc__</code> gives us the
+docstring of that class. Let's test it out. For this purpose, we need to start
+with defining a class. Let's consider we are trying to define a class that holds
+information of students.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-python"><span style="color: #4f97d7; font-weight: bold;">class</span> <span style="color: #ce537a; font-weight: bold;">Student</span>:
+    <span style="color: #9f8766;">'''</span>
+<span style="color: #9f8766;">    Class for defining students in our system</span>
+<span style="color: #9f8766;">    '''</span>
+    <span style="color: #4f97d7; font-weight: bold;">pass</span>
+</pre>
+</div>
+
+
+<p>
+This class should have attributes that show some part of student's identities as
+well as a method for us to access these data.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-python"><span style="color: #4f97d7;">print</span><span style="color: #4f97d7;">(</span>Student.<span style="color: #4f97d7;">__doc__</span><span style="color: #4f97d7;">)</span>
+</pre>
+</div>
+
+<p>
+Classes are also able to keep attributes. Let's add an attribute for age of
+student:
+</p>
+
+<div class="org-src-container">
+<pre class="src src-python"><span style="color: #4f97d7; font-weight: bold;">class</span> <span style="color: #ce537a; font-weight: bold;">Student</span>:
+    <span style="color: #9f8766;">'''</span>
+<span style="color: #9f8766;">    Class for defining students in our system</span>
+<span style="color: #9f8766;">    '''</span>
+
+    <span style="color: #2aa1ae; background-color: #292e34;"># </span><span style="color: #2aa1ae; background-color: #292e34;">This is for keeping the age of the student</span>
+    age = <span style="color: #a45bad;">10</span>
+
+<span style="color: #4f97d7;">print</span><span style="color: #4f97d7;">(</span>Student.age<span style="color: #4f97d7;">)</span>
+</pre>
+</div>
+
+<p>
+Or we can define a function inside a class that does some group of processes:
+</p>
+
+<div class="org-src-container">
+<pre class="src src-python"><span style="color: #4f97d7; font-weight: bold;">class</span> <span style="color: #ce537a; font-weight: bold;">Student</span>:
+    <span style="color: #9f8766;">'''</span>
+<span style="color: #9f8766;">    Class for defining students in our system</span>
+<span style="color: #9f8766;">    '''</span>
+
+    <span style="color: #2aa1ae; background-color: #292e34;"># </span><span style="color: #2aa1ae; background-color: #292e34;">This is for keeping the age of the student</span>
+    age = <span style="color: #a45bad;">10</span>
+
+    <span style="color: #4f97d7; font-weight: bold;">def</span> <span style="color: #bc6ec5; font-weight: bold;">greet</span><span style="color: #4f97d7;">(</span><span style="color: #4f97d7; font-weight: bold;">self</span><span style="color: #4f97d7;">)</span>:
+        <span style="color: #4f97d7;">print</span><span style="color: #4f97d7;">(</span><span style="color: #2d9574;">'Hello'</span><span style="color: #4f97d7;">)</span>
+
+
+</pre>
+</div>
+
+<p>
+As soon as we define a class, a new class object is created with the
+same name. This class object allows us to access the different attributes as
+well as to instantiate new objects of that class.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-python"><span style="color: #4f97d7;">print</span><span style="color: #4f97d7;">(</span>Student.greet<span style="color: #4f97d7;">)</span>
+</pre>
+</div>
+</div>
+
+<div id="outline-container-org2243a91" class="outline-3">
+<h3 id="org2243a91"><span class="section-number-3">3.1.</span> Creating an Object in Python</h3>
+<div class="outline-text-3" id="text-3-1">
+<p>
+We saw that the class object could be used to access different attributes.
+</p>
+
+<p>
+It can also be used to create new object instances (instantiation) of that
+class. The procedure to create an object is similar to a <code>function</code> call.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-python"><span style="color: #7590db;">habib</span> = Student<span style="color: #4f97d7;">()</span>
+</pre>
+</div>
+
+<p>
+This will create a new object instance named <code>habib</code>. We can access the
+attributes of objects using the object name prefix.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-python"><span style="color: #4f97d7; font-weight: bold;">class</span> <span style="color: #ce537a; font-weight: bold;">Student</span>:
+    <span style="color: #9f8766;">'''</span>
+<span style="color: #9f8766;">    Class for defining students in our system</span>
+<span style="color: #9f8766;">    '''</span>
+
+    <span style="color: #2aa1ae; background-color: #292e34;"># </span><span style="color: #2aa1ae; background-color: #292e34;">This is for keeping the age of the student</span>
+    age = <span style="color: #a45bad;">10</span>
+
+    <span style="color: #4f97d7; font-weight: bold;">def</span> <span style="color: #bc6ec5; font-weight: bold;">greet</span><span style="color: #4f97d7;">(</span><span style="color: #4f97d7; font-weight: bold;">self</span><span style="color: #4f97d7;">)</span>:
+        <span style="color: #4f97d7;">print</span><span style="color: #4f97d7;">(</span><span style="color: #2d9574;">'Hello'</span><span style="color: #4f97d7;">)</span>
+
+<span style="color: #7590db;">habib</span> = Student<span style="color: #4f97d7;">()</span>
+
+<span style="color: #4f97d7;">print</span><span style="color: #4f97d7;">(</span>Student.greet<span style="color: #4f97d7;">)</span>
+
+<span style="color: #4f97d7;">print</span><span style="color: #4f97d7;">(</span>habib.greet<span style="color: #4f97d7;">)</span>
+
+<span style="color: #4f97d7;">print</span><span style="color: #4f97d7;">(</span>habib.greet<span style="color: #bc6ec5;">()</span><span style="color: #4f97d7;">)</span>
+</pre>
+</div>
+
+<p>
+You may have noticed the <code>self</code> parameter in function definition inside the
+class but we called the method simply as <code>habib.greet()</code> without any arguments.
+It still worked.
+</p>
+
+<p>
+This is because, whenever an object calls its method, the object itself is
+passed as the first argument. So, <code>habib.greet()</code> translates into
+<code>Student.greet(habib)</code>.
+</p>
+
+<p>
+In general, calling a method with a list of <code>n</code> arguments is equivalent to calling
+the corresponding function with an argument list that is created by inserting
+the method's object before the first argument.
+</p>
+
+<p>
+For these reasons, the first argument of the function in class must be the
+object itself. This is conventionally called <code>self</code>.
+</p>
+</div>
+</div>
+
+<div id="outline-container-org5eb8dd0" class="outline-3">
+<h3 id="org5eb8dd0"><span class="section-number-3">3.2.</span> Constructors in Python</h3>
+<div class="outline-text-3" id="text-3-2">
+<p>
+Class functions that begin with double underscore <code>__</code> are called special
+functions as they have special meanings.
+</p>
+
+<p>
+Of one particular interest is the <code>__init__()</code> function. This special function
+gets called whenever a new object of that class is instantiated.
+</p>
+
+<p>
+This type of function is also called <code>constructors</code> in Object Oriented Programming
+(OOP). We normally use it to initialize all the variables.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-python"><span style="color: #4f97d7; font-weight: bold;">class</span> <span style="color: #ce537a; font-weight: bold;">Student</span>:
+    <span style="color: #9f8766;">'''</span>
+<span style="color: #9f8766;">    Class for defining students in our system</span>
+<span style="color: #9f8766;">    '''</span>
+
+    <span style="color: #2aa1ae; background-color: #292e34;"># </span><span style="color: #2aa1ae; background-color: #292e34;">This is for keeping the age of the student</span>
+    <span style="color: #4f97d7; font-weight: bold;">def</span> <span style="color: #bc6ec5; font-weight: bold;">__init__</span><span style="color: #4f97d7;">(</span><span style="color: #4f97d7; font-weight: bold;">self</span>, first_name,last_name, mac_id, age=<span style="color: #a45bad;">10</span><span style="color: #4f97d7;">)</span>:
+        <span style="color: #4f97d7; font-weight: bold;">self</span>.first_name = first_name
+        <span style="color: #4f97d7; font-weight: bold;">self</span>.last_name = last_name
+        <span style="color: #4f97d7; font-weight: bold;">self</span>.mac_id = mac_id
+        <span style="color: #4f97d7; font-weight: bold;">self</span>.age=<span style="color: #a45bad;">10</span>
+
+    <span style="color: #4f97d7; font-weight: bold;">def</span> <span style="color: #bc6ec5; font-weight: bold;">get_data</span><span style="color: #4f97d7;">(</span><span style="color: #4f97d7; font-weight: bold;">self</span><span style="color: #4f97d7;">)</span>:
+        <span style="color: #4f97d7;">print</span><span style="color: #4f97d7;">(</span>f<span style="color: #2d9574;">'You are looking at </span>{<span style="color: #4f97d7; font-weight: bold;">self</span>.first_name}<span style="color: #2d9574;"> </span>{<span style="color: #4f97d7; font-weight: bold;">self</span>.last_name}<span style="color: #2d9574;"> information with MacID = </span>{<span style="color: #4f97d7; font-weight: bold;">self</span>.mac_id}<span style="color: #2d9574;"> and age of </span>{<span style="color: #4f97d7; font-weight: bold;">self</span>.age}<span style="color: #2d9574;">.'</span>
+</pre>
+</div>
+
+
+<p>
+In the above example, we defined a new class to represent a student. It has two
+functions, <code>__init__()</code> to initialize the variables and <code>get_data()</code> to display the
+student's data. Observer that age already has a default value and there is no
+need to pass any value for it.
+</p>
+
+
+<p>
+Now let's look at another constructor. <code>__eq__</code> that can be used to compare two
+objects by their values. Python automatically calls the <code>__eq__</code> method of a
+class when you use the <code>==</code> operator to compare the instances of the class. By
+default, Python uses the <code>is</code> operator if you don’t provide a specific
+implementation for the <code>__eq__</code> method. The following shows how to implement the
+<code>__eq__</code> method in the Student class
+</p>
+
+<div class="org-src-container">
+<pre class="src src-python"><span style="color: #4f97d7; font-weight: bold;">class</span> <span style="color: #ce537a; font-weight: bold;">Student</span>:
+    <span style="color: #9f8766;">'''</span>
+<span style="color: #9f8766;">    Class for defining students in our system</span>
+<span style="color: #9f8766;">    '''</span>
+
+    <span style="color: #2aa1ae; background-color: #292e34;"># </span><span style="color: #2aa1ae; background-color: #292e34;">This is for keeping the age of the student</span>
+    <span style="color: #4f97d7; font-weight: bold;">def</span> <span style="color: #bc6ec5; font-weight: bold;">__init__</span><span style="color: #4f97d7;">(</span><span style="color: #4f97d7; font-weight: bold;">self</span>, first_name,last_name, mac_id, age=<span style="color: #a45bad;">10</span><span style="color: #4f97d7;">)</span>:
+        <span style="color: #4f97d7; font-weight: bold;">self</span>.first_name = first_name
+        <span style="color: #4f97d7; font-weight: bold;">self</span>.last_name = last_name
+        <span style="color: #4f97d7; font-weight: bold;">self</span>.mac_id = mac_id
+        <span style="color: #4f97d7; font-weight: bold;">self</span>.age=<span style="color: #a45bad;">10</span>
+
+    <span style="color: #4f97d7; font-weight: bold;">def</span> <span style="color: #bc6ec5; font-weight: bold;">get_data</span><span style="color: #4f97d7;">(</span><span style="color: #4f97d7; font-weight: bold;">self</span><span style="color: #4f97d7;">)</span>:
+        <span style="color: #4f97d7;">print</span><span style="color: #4f97d7;">(</span>f<span style="color: #2d9574;">'You are looking at </span>{<span style="color: #4f97d7; font-weight: bold;">self</span>.first_name}<span style="color: #2d9574;"> </span>{<span style="color: #4f97d7; font-weight: bold;">self</span>.last_name}<span style="color: #2d9574;"> information with MacID = </span>{<span style="color: #4f97d7; font-weight: bold;">self</span>.mac_id}<span style="color: #2d9574;"> and age of </span>{<span style="color: #4f97d7; font-weight: bold;">self</span>.age}<span style="color: #2d9574;">.'</span>
+
+    <span style="color: #4f97d7; font-weight: bold;">def</span> <span style="color: #bc6ec5; font-weight: bold;">__eq__</span><span style="color: #bc6ec5;">(</span><span style="color: #4f97d7; font-weight: bold;">self</span>, other<span style="color: #bc6ec5;">)</span>:
+        <span style="color: #2d9574;">'''</span>
+<span style="color: #2d9574;">        Self addressing the current instance of the object while the other address the second instance of the object</span>
+<span style="color: #2d9574;">        '''</span>
+        <span style="color: #4f97d7; font-weight: bold;">return</span> <span style="color: #4f97d7; font-weight: bold;">self</span>.age == other.age
+
+habib = Student<span style="color: #bc6ec5;">(</span><span style="color: #4f97d7; font-weight: bold;">self</span>, <span style="color: #2d9574;">'Habib'</span>, <span style="color: #2d9574;">'Ghaffari'</span>, <span style="color: #2d9574;">'ghaffh1'</span><span style="color: #bc6ec5;">)</span>
+hadi = Student<span style="color: #bc6ec5;">(</span><span style="color: #4f97d7; font-weight: bold;">self</span>, <span style="color: #2d9574;">'Hadi'</span>, <span style="color: #2d9574;">'Daniali'</span>, <span style="color: #2d9574;">'danialih'</span>, <span style="color: #a45bad;">20</span><span style="color: #bc6ec5;">)</span>
+
+<span style="color: #4f97d7; font-weight: bold;">if</span> habib == hadi:
+  <span style="color: #4f97d7;">print</span><span style="color: #bc6ec5;">(</span><span style="color: #2d9574;">'These two persons are the same'</span><span style="color: #bc6ec5;">)</span>
+<span style="color: #4f97d7; font-weight: bold;">else</span>:
+ <span style="color: #4f97d7;">print</span><span style="color: #bc6ec5;">(</span><span style="color: #2d9574;">'These two persons are different'</span><span style="color: #bc6ec5;">)</span>
+</pre>
+</div>
+
+<p>
+But how this function is working? Since Python does not provide left/right
+versions of its comparison operators, how does it decide which function to call?
+Let's make some changes in the function to figure out how it makes the
+comparison:
+</p>
+
+<div class="org-src-container">
+<pre class="src src-python"><span style="color: #4f97d7; font-weight: bold;">class</span> <span style="color: #ce537a; font-weight: bold;">A</span><span style="color: #4f97d7;">(</span><span style="color: #4f97d7;">object</span><span style="color: #4f97d7;">)</span>:
+    <span style="color: #4f97d7; font-weight: bold;">def</span> <span style="color: #bc6ec5; font-weight: bold;">__eq__</span><span style="color: #4f97d7;">(</span><span style="color: #4f97d7; font-weight: bold;">self</span>, other<span style="color: #4f97d7;">)</span>:
+        <span style="color: #4f97d7;">print</span><span style="color: #4f97d7;">(</span><span style="color: #2d9574;">"A __eq__ called: %r == %r ?"</span> % <span style="color: #bc6ec5;">(</span><span style="color: #4f97d7; font-weight: bold;">self</span>, other<span style="color: #bc6ec5;">)</span><span style="color: #4f97d7;">)</span>
+        <span style="color: #4f97d7; font-weight: bold;">return</span> <span style="color: #4f97d7; font-weight: bold;">self</span>.value == other
+<span style="color: #4f97d7; font-weight: bold;">class</span> <span style="color: #ce537a; font-weight: bold;">B</span><span style="color: #4f97d7;">(</span><span style="color: #4f97d7;">object</span><span style="color: #4f97d7;">)</span>:
+    <span style="color: #4f97d7; font-weight: bold;">def</span> <span style="color: #bc6ec5; font-weight: bold;">__eq__</span><span style="color: #4f97d7;">(</span><span style="color: #4f97d7; font-weight: bold;">self</span>, other<span style="color: #4f97d7;">)</span>:
+        <span style="color: #4f97d7;">print</span><span style="color: #4f97d7;">(</span><span style="color: #2d9574;">"B __eq__ called: %r == %r ?"</span> % <span style="color: #bc6ec5;">(</span><span style="color: #4f97d7; font-weight: bold;">self</span>, other<span style="color: #bc6ec5;">)</span><span style="color: #4f97d7;">)</span>
+        <span style="color: #4f97d7; font-weight: bold;">return</span> <span style="color: #4f97d7; font-weight: bold;">self</span>.value == other
+
+a = A<span style="color: #4f97d7;">()</span>
+a.value = <span style="color: #a45bad;">3</span>
+b = B<span style="color: #4f97d7;">()</span>
+b.value = <span style="color: #a45bad;">4</span>
+a == b
+</pre>
+</div>
+
+<p>
+Explanation: The <code>a==b</code> expression invokes <code>A.__eq__</code>, since it exists. Its code
+includes <code>self.value == other</code>. Since int's don't know how to compare themselves
+to B's, Python tries invoking <code>B.__eq__</code> to see if it knows how to compare itself
+to an int. So it will print this:
+</p>
+
+<div class="org-src-container">
+<pre class="src src-text">A __eq__ called: &lt;__main__.A object at 0x013BA070&gt; == &lt;__main__.B object at 0x013BA090&gt; ?
+B __eq__ called: &lt;__main__.B object at 0x013BA090&gt; == 3 ?
+</pre>
+</div>
+
+<p>
+Now we have clear vision of how the decision tree for <code>__eq__</code> constructor
+works.
+</p>
+</div>
+</div>
+</div>
+
+
+<div id="outline-container-org48ea59a" class="outline-2">
+<h2 id="org48ea59a"><span class="section-number-2">4.</span> Exercises</h2>
+<div class="outline-text-2" id="text-4">
+<ol class="org-ol">
+<li>Try to define a subclass called <code>EngStudent</code>. This class going to address the
+engineering facility students and has an extra attribute called <code>faculity</code>.</li>
+
+<li>Implement the <code>__init__()</code>, <code>__eq__</code>, and <code>__ne__</code> constructors for
+<code>EngStudent</code>.</li>
+
+<li>Justify how decision tree for <code>__eq__</code> and <code>__ne__</code> going to work? What would
+happen if we do not implement <code>__eq__</code>?</li>
+</ol>
+</div>
+</div>
+</div>
+<div id="postamble" class="status">
+<p class="date">Date: 2022-11-14 Mon 00:00</p>
+<p class="author">Author: Habib Ghaffari</p>
+<p class="date">Created: 2022-11-15 Tue 14:33</p>
+<p class="validation"><a href="https://validator.w3.org/check?uri=referer">Validate</a></p>
+</div>
+</body>
+</html>

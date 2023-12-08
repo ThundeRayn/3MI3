@@ -1,0 +1,309 @@
+% Created 2022-10-04 Tue 11:42
+% Intended LaTeX compiler: pdflatex
+\documentclass[11pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{graphicx}
+\usepackage{longtable}
+\usepackage{wrapfig}
+\usepackage{rotating}
+\usepackage[normalem]{ulem}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{capt-of}
+\usepackage{hyperref}
+\usepackage{hyperref}
+\usepackage{amsmath}
+\usepackage{listings}
+\usepackage{xcolor}
+\usepackage{graphicx}
+\definecolor{codegreen}{rgb}{0,0.6,0}
+\definecolor{codegray}{rgb}{0.5,0.5,0.5}
+\definecolor{codepurple}{rgb}{0.58,0,0.82}
+\definecolor{backcolour}{rgb}{0.95,0.95,0.92}
+\lstdefinestyle{mystyle}{
+backgroundcolor=\color{backcolour},
+commentstyle=\color{codegreen},
+keywordstyle=\color{magenta},
+numberstyle=\tiny\color{codegray},
+stringstyle=\color{codepurple},
+basicstyle=\ttfamily\footnotesize,
+breakatwhitespace=false,
+breaklines=true,
+captionpos=b,
+keepspaces=true,
+numbers=left,
+numbersep=5pt,
+showspaces=false,
+showstringspaces=false,
+showtabs=false,
+tabsize=2
+}
+\lstset{style=mystyle, language=Python}
+\author{Habib Ghaffari}
+\date{2022-09-19 Mon}
+\title{Tutorial \#2 - Working on your assignment}
+\hypersetup{
+ pdfauthor={Habib Ghaffari},
+ pdftitle={Tutorial \#2 - Working on your assignment},
+ pdfkeywords={},
+ pdfsubject={},
+ pdfcreator={Emacs 28.1 (Org mode 9.5.2)}, 
+ pdflang={English}}
+\begin{document}
+
+\maketitle
+\tableofcontents
+
+
+
+\section{Introduction}
+\label{sec:org5ab51d3}
+
+The objective of this tutorial is to work on some examples that will help you
+with your assignments. For this tutorial, I am still going to continue working
+with \texttt{Haskell}. The solutions we are presenting may/may not be related to your
+assignment. It is your responsibility to find the relevance and try to figure out
+how you could use it in your submissions. I am also going to give you a brief
+introduction to the \texttt{Hakell} while I am presenting this tutorial.
+
+
+\section{Objective}
+\label{sec:org2bf516e}
+
+\begin{itemize}
+\item Becoming familiar with \texttt{Haskell}.
+\item Learn how to expand the regular expression based on what we defined last
+week.
+\item Learn to apply \texttt{BNF} for our definitions.
+\item Learn how to use \texttt{Haskell} for the implementation of a recursive parser to
+parse our expressions.
+\end{itemize}
+
+
+\section{Learn how to work with \texttt{Haskell}}
+\label{sec:orga32de30}
+
+\subsection{Installing \texttt{Haskell} interpreter}
+\label{sec:orgdef6eb4}
+
+\texttt{GHCI} is \texttt{Haskell} interpreter It is an interactive environment, in which
+\texttt{Haskell} expressions can be interactively evaluated and programs can be
+interpreter. But in order to have the most stable installation, we recommend
+you install \texttt{GHCI} using \texttt{Stack}.
+
+
+\texttt{Stack} is a cross-platform program for developing Haskell projects. It is
+aimed at Haskellers both new and experienced. In order to install \texttt{Stack} you
+can download it for your machine and the OS you are using from \href{https://docs.haskellstack.org/en/stable/README/}{here}.
+
+
+After installation of \texttt{Stack} there are some other things that you can do in
+order to take the best out of it. One of the best IDEs for \texttt{Haskell}
+implementation is \texttt{IntelliJ IDEA}. In order to make \texttt{Stack} work properly
+with this IDE follow the instruction below.
+
+\begin{itemize}
+\item Open your \texttt{Terminal} or \texttt{Command Prompt} and run the following command
+\end{itemize}
+
+\begin{verbatim}
+stack install hindent stylish-haskell
+\end{verbatim}
+\begin{itemize}
+\item Download and install \texttt{IntelliJ IDEA}. Since you are a student you can use
+\texttt{IDEA} and other IDEs of \texttt{IntelliJ} for free as long as you use your
+academic email address. The process is straightforward. Just register for
+an account in IntelliJ's website and apply for an activation license. You may
+ask to renew your license annually.
+\item Open \texttt{IDEA} and install \texttt{Intellij-Haskell} plugin and restart the IDE.
+\item Open the \texttt{IDEA} again and make a new project.
+\begin{itemize}
+\item Select \texttt{Stack binary}.
+\item In the next step choose the proper \texttt{SDK}. Most of the time \texttt{IDEA}
+automatically going to detect the stack path. If not just manually select
+it.
+\end{itemize}
+\end{itemize}
+
+Now you are ready to start working with \texttt{IDEA} and \texttt{Haskell} programming.
+
+\textbf{Note:} You can also use other IDEs such as \texttt{VSCode} while using \texttt{Stack}. For
+that just try to find the proper instruction to configure your IDE.
+
+Now it is time to do some \texttt{Haskell} programming.
+
+\subsection{Introduction to \texttt{Haskell} programming}
+\label{sec:org39a8242}
+
+The best resources to learn \texttt{haskell} programming are listed below:
+\begin{itemize}
+\item \url{http://learnyouahaskell.com}
+\item \url{https://wiki.haskell.org/Learning\_Haskell}
+\end{itemize}
+
+Here we are going to do some live coding which will introduce you to the \texttt{types}
+and \texttt{typeclasses} as well as \texttt{Algebraic Data types}.
+
+You can check the example \href{./sample.hs}{hs} file later if you want to review the material.
+
+Let's define \texttt{Efficiency} and \texttt{Safety}.
+
+\begin{itemize}
+\item \textbf{Efficiency} means ease of use for the programmer, and ease of achieving the
+programming goals.
+\item \textbf{Safety} means no unintended errors.
+\end{itemize}
+
+
+\begin{itemize}
+\item \texttt{Haskell} is a statically typed language. This means that the type errors
+can be caught at compile time. This makes \texttt{Haskell} a very safe language to
+work with.
+\item The \texttt{Haskell} interpreter can usually infer the types of expressions based
+on the definitions you are making. In this manner, \texttt{Haskell} can be
+consider \texttt{Efficient} programming language. However, for more
+complicated functions and in most of the cases, it is better to write out
+the type signature of a function. It means more work for the developer
+which means less efficient programming language.
+\item Indention is mandatory in \texttt{Haskell}. Without \texttt{Indention} the interpreter
+may not able to detect the function definition, pattern matchings, etc
+without indention. Mandatory indention makes programming harder unless you
+use a proper IDE. Therefore in this matter, \texttt{Haskell} is not an \texttt{Efficient}
+programming language.
+\item \texttt{Haskell} can be written using braces and semi-colons, just like \texttt{C}.
+However, no one does. Instead, the “layout” rule is used, where spaces
+represent scope. The general rule is: always indent. When the compiler
+complains, indent more. Based on this we can say \texttt{Haskell} has some sort of
+\texttt{Efficiency} for programmers as well.
+\item \texttt{Haskell} uses Generational garbage collection (GC). In fact, it has
+one of the fastest garbage collection strategies known as nursery. However,
+it use a bit more space to handle the garbage collection. But it is not
+important for us when we are talking about \texttt{safety}. So we could consider
+\texttt{Haskell} as a very \texttt{safe} programming language. For more information about
+garbage collection read the following link:
+
+\url{https://www.channable.com/tech/lessons-in-managing-haskell-memory}
+\end{itemize}
+
+Here I tried to cover some of the tasks you need to do for questions number 1 to
+number 5. It is just a matter of investigation and figuring out how could you
+compare \texttt{efficiency} vs \texttt{safety} when it comes to \texttt{Python}.
+
+\subsection{Naming Conventions in Haskell}
+\label{sec:org118f6fe}
+
+Names in Haskell must satisfy the following simple rules:
+
+\begin{itemize}
+\item Types and typeclasses must start with an uppercase letter
+\item Functions and variables must start with a lowercase letter
+\item Top-level operator functions must start with any allowed symbol except for
+\texttt{:}.
+\item Constructors as operators must start with \texttt{:}.
+\end{itemize}
+
+Additionally, functions follow the \texttt{lowerCamelCase} style and types follow the
+\texttt{UpperCamelCase} style.
+
+Lets consider Types / typeclasses / Functions / variables as identifiers. Now
+lets define \texttt{Haskell} identifiers using the \texttt{EBNF}:
+
+\begin{verbatim}
+<H_ID> ::= <head> {<tail>}
+<head> ::= <upper> | <lower>
+<tail> ::= <upper> | <lower> | <special> | <digits> | '
+<lower> ::= a | b | c | d | e | f | g | h | i | j | k | l | m | n | o | p | q | r | s | t | u | v | w | x | y | z | _  (a-z) is accepted
+<upper> ::= A | B | C | D | E | F | G | H | I | J | K | L | M | N | O | P | Q | R | S | T | U | V | W | X | Y | Z (A-Z) is accepted
+<digits> ::= 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9  (0-9) is accepted
+\end{verbatim}
+
+What if we want to use \texttt{BNF}:
+
+\begin{verbatim}
+Functions and Variables  # <H_ID> ::= <head>[<tail>]
+                           <head> ::= <lower>
+                           <tail> ::= <lower> | <upper>
+                           ...
+\end{verbatim}
+
+Exercise: Consider how we define the variable above, and try to  define the
+following token:
+
+\begin{itemize}
+\item Unsigned integers with leading zeros allowed (Such as 0, 0001, 1, 200, 0220 etc.)
+\end{itemize}
+
+Make sure you check the \texttt{Help} page when you staring answering the questions.
+You may find lots of useful information. Here is the link:
+
+\url{http://www.cas.mcmaster.ca/\~franek/courses/cs3mi3/help/help.cgi}
+
+But you need to sign-in to see the information.
+
+\section{Language Definition}
+\label{sec:org55fefb1}
+
+
+Let's jump to the language we started to define last week. Here is what we did
+two weeks ago to refresh your mind:
+
+\begin{verbatim}
+t ::=                             Term
+        true                      Constant True
+        false                     Constant False
+        if t then t else t        Conditional Expression
+        0                         Zero
+        succ t                    Successor
+        pred t                    Predecessor
+        iszero t                  Zero Test
+\end{verbatim}
+
+The only thing we do not have here is a strategy to write this language as a
+text file such that an interpreter is able to read it and then evaluate it for
+us. I am going to use the same strategy introduce in this file for tokens:
+
+\begin{verbatim}
+EOI = 0 # Enf of input
+T = 1 # True
+F = 2 # False
+Z = 3 # Zero
+Succ = 4 # Successor
+Pred = 5 # Predecessor
+IsZero = 6 # Zero Test
+IfThenElse = 7  # Conditional Expression
+\end{verbatim}
+
+Here is my grammar:
+
+\begin{verbatim}
+expersion   : term | termTail
+termTail    : Succ term | Pred term | isZero term | ifThenElse term term term
+term        : T | F | Z
+\end{verbatim}
+
+Now it is more clear. Right!
+
+Let's see how we could recursively read an expression and evaluate it in \texttt{Haskell}:
+
+\begin{verbatim}
+data Term =
+    T
+  | F
+  | Z
+  | Succ term 
+  | Pred term
+  | IsZero term
+  | IfThenElse term term term
+\end{verbatim}
+
+Here are some expressions defined based on the above languge:
+
+\begin{verbatim}
+expr1 :: Term
+expr1 = Succ (Succ (Succ Z))
+
+expr2 :: Term
+expr2 = ifThenElse T Z (Suc Z)
+\end{verbatim}
+\end{document}

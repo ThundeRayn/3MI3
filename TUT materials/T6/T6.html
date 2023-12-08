@@ -1,0 +1,1268 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<!-- 2022-11-08 Tue 10:28 -->
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Tutorial #6 - Names, Bindings and Scopes</title>
+<meta name="author" content="Habib Ghaffari" />
+<meta name="generator" content="Org Mode" />
+<style>
+  #content { max-width: 60em; margin: auto; }
+  .title  { text-align: center;
+             margin-bottom: .2em; }
+  .subtitle { text-align: center;
+              font-size: medium;
+              font-weight: bold;
+              margin-top:0; }
+  .todo   { font-family: monospace; color: red; }
+  .done   { font-family: monospace; color: green; }
+  .priority { font-family: monospace; color: orange; }
+  .tag    { background-color: #eee; font-family: monospace;
+            padding: 2px; font-size: 80%; font-weight: normal; }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .org-right  { margin-left: auto; margin-right: 0px;  text-align: right; }
+  .org-left   { margin-left: 0px;  margin-right: auto; text-align: left; }
+  .org-center { margin-left: auto; margin-right: auto; text-align: center; }
+  .underline { text-decoration: underline; }
+  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
+  p.verse { margin-left: 3%; }
+  pre {
+    border: 1px solid #e6e6e6;
+    border-radius: 3px;
+    background-color: #f2f2f2;
+    padding: 8pt;
+    font-family: monospace;
+    overflow: auto;
+    margin: 1.2em;
+  }
+  pre.src {
+    position: relative;
+    overflow: auto;
+  }
+  pre.src:before {
+    display: none;
+    position: absolute;
+    top: -8px;
+    right: 12px;
+    padding: 3px;
+    color: #555;
+    background-color: #f2f2f299;
+  }
+  pre.src:hover:before { display: inline; margin-top: 14px;}
+  /* Languages per Org manual */
+  pre.src-asymptote:before { content: 'Asymptote'; }
+  pre.src-awk:before { content: 'Awk'; }
+  pre.src-authinfo::before { content: 'Authinfo'; }
+  pre.src-C:before { content: 'C'; }
+  /* pre.src-C++ doesn't work in CSS */
+  pre.src-clojure:before { content: 'Clojure'; }
+  pre.src-css:before { content: 'CSS'; }
+  pre.src-D:before { content: 'D'; }
+  pre.src-ditaa:before { content: 'ditaa'; }
+  pre.src-dot:before { content: 'Graphviz'; }
+  pre.src-calc:before { content: 'Emacs Calc'; }
+  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
+  pre.src-fortran:before { content: 'Fortran'; }
+  pre.src-gnuplot:before { content: 'gnuplot'; }
+  pre.src-haskell:before { content: 'Haskell'; }
+  pre.src-hledger:before { content: 'hledger'; }
+  pre.src-java:before { content: 'Java'; }
+  pre.src-js:before { content: 'Javascript'; }
+  pre.src-latex:before { content: 'LaTeX'; }
+  pre.src-ledger:before { content: 'Ledger'; }
+  pre.src-lisp:before { content: 'Lisp'; }
+  pre.src-lilypond:before { content: 'Lilypond'; }
+  pre.src-lua:before { content: 'Lua'; }
+  pre.src-matlab:before { content: 'MATLAB'; }
+  pre.src-mscgen:before { content: 'Mscgen'; }
+  pre.src-ocaml:before { content: 'Objective Caml'; }
+  pre.src-octave:before { content: 'Octave'; }
+  pre.src-org:before { content: 'Org mode'; }
+  pre.src-oz:before { content: 'OZ'; }
+  pre.src-plantuml:before { content: 'Plantuml'; }
+  pre.src-processing:before { content: 'Processing.js'; }
+  pre.src-python:before { content: 'Python'; }
+  pre.src-R:before { content: 'R'; }
+  pre.src-ruby:before { content: 'Ruby'; }
+  pre.src-sass:before { content: 'Sass'; }
+  pre.src-scheme:before { content: 'Scheme'; }
+  pre.src-screen:before { content: 'Gnu Screen'; }
+  pre.src-sed:before { content: 'Sed'; }
+  pre.src-sh:before { content: 'shell'; }
+  pre.src-sql:before { content: 'SQL'; }
+  pre.src-sqlite:before { content: 'SQLite'; }
+  /* additional languages in org.el's org-babel-load-languages alist */
+  pre.src-forth:before { content: 'Forth'; }
+  pre.src-io:before { content: 'IO'; }
+  pre.src-J:before { content: 'J'; }
+  pre.src-makefile:before { content: 'Makefile'; }
+  pre.src-maxima:before { content: 'Maxima'; }
+  pre.src-perl:before { content: 'Perl'; }
+  pre.src-picolisp:before { content: 'Pico Lisp'; }
+  pre.src-scala:before { content: 'Scala'; }
+  pre.src-shell:before { content: 'Shell Script'; }
+  pre.src-ebnf2ps:before { content: 'ebfn2ps'; }
+  /* additional language identifiers per "defun org-babel-execute"
+       in ob-*.el */
+  pre.src-cpp:before  { content: 'C++'; }
+  pre.src-abc:before  { content: 'ABC'; }
+  pre.src-coq:before  { content: 'Coq'; }
+  pre.src-groovy:before  { content: 'Groovy'; }
+  /* additional language identifiers from org-babel-shell-names in
+     ob-shell.el: ob-shell is the only babel language using a lambda to put
+     the execution function name together. */
+  pre.src-bash:before  { content: 'bash'; }
+  pre.src-csh:before  { content: 'csh'; }
+  pre.src-ash:before  { content: 'ash'; }
+  pre.src-dash:before  { content: 'dash'; }
+  pre.src-ksh:before  { content: 'ksh'; }
+  pre.src-mksh:before  { content: 'mksh'; }
+  pre.src-posh:before  { content: 'posh'; }
+  /* Additional Emacs modes also supported by the LaTeX listings package */
+  pre.src-ada:before { content: 'Ada'; }
+  pre.src-asm:before { content: 'Assembler'; }
+  pre.src-caml:before { content: 'Caml'; }
+  pre.src-delphi:before { content: 'Delphi'; }
+  pre.src-html:before { content: 'HTML'; }
+  pre.src-idl:before { content: 'IDL'; }
+  pre.src-mercury:before { content: 'Mercury'; }
+  pre.src-metapost:before { content: 'MetaPost'; }
+  pre.src-modula-2:before { content: 'Modula-2'; }
+  pre.src-pascal:before { content: 'Pascal'; }
+  pre.src-ps:before { content: 'PostScript'; }
+  pre.src-prolog:before { content: 'Prolog'; }
+  pre.src-simula:before { content: 'Simula'; }
+  pre.src-tcl:before { content: 'tcl'; }
+  pre.src-tex:before { content: 'TeX'; }
+  pre.src-plain-tex:before { content: 'Plain TeX'; }
+  pre.src-verilog:before { content: 'Verilog'; }
+  pre.src-vhdl:before { content: 'VHDL'; }
+  pre.src-xml:before { content: 'XML'; }
+  pre.src-nxml:before { content: 'XML'; }
+  /* add a generic configuration mode; LaTeX export needs an additional
+     (add-to-list 'org-latex-listings-langs '(conf " ")) in .emacs */
+  pre.src-conf:before { content: 'Configuration File'; }
+
+  table { border-collapse:collapse; }
+  caption.t-above { caption-side: top; }
+  caption.t-bottom { caption-side: bottom; }
+  td, th { vertical-align:top;  }
+  th.org-right  { text-align: center;  }
+  th.org-left   { text-align: center;   }
+  th.org-center { text-align: center; }
+  td.org-right  { text-align: right;  }
+  td.org-left   { text-align: left;   }
+  td.org-center { text-align: center; }
+  dt { font-weight: bold; }
+  .footpara { display: inline; }
+  .footdef  { margin-bottom: 1em; }
+  .figure { padding: 1em; }
+  .figure p { text-align: center; }
+  .equation-container {
+    display: table;
+    text-align: center;
+    width: 100%;
+  }
+  .equation {
+    vertical-align: middle;
+  }
+  .equation-label {
+    display: table-cell;
+    text-align: right;
+    vertical-align: middle;
+  }
+  .inlinetask {
+    padding: 10px;
+    border: 2px solid gray;
+    margin: 10px;
+    background: #ffffcc;
+  }
+  #org-div-home-and-up
+   { text-align: right; font-size: 70%; white-space: nowrap; }
+  textarea { overflow-x: auto; }
+  .linenr { font-size: smaller }
+  .code-highlighted { background-color: #ffff00; }
+  .org-info-js_info-navigation { border-style: none; }
+  #org-info-js_console-label
+    { font-size: 10px; font-weight: bold; white-space: nowrap; }
+  .org-info-js_search-highlight
+    { background-color: #ffff00; color: #000000; font-weight: bold; }
+  .org-svg { width: 90%; }
+</style>
+</head>
+<body>
+<div id="content" class="content">
+<h1 class="title">Tutorial #6 - Names, Bindings and Scopes</h1>
+<div id="table-of-contents" role="doc-toc">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents" role="doc-toc">
+<ul>
+<li><a href="#s1">1. Introduction</a></li>
+<li><a href="#s2">2. Names</a></li>
+<li><a href="#s3">3. Binding</a>
+<ul>
+<li><a href="#org66893ec">3.1. Storage Bindings and Lifetime</a></li>
+</ul>
+</li>
+<li><a href="#s4">4. Scope and Lifetime</a>
+<ul>
+<li><a href="#org10e6283">4.1. Static Scope</a></li>
+<li><a href="#org59f3ded">4.2. Blocks</a></li>
+<li><a href="#org352127b">4.3. Dynamic Scope</a></li>
+<li><a href="#org5830730">4.4. Referencing Enviroments</a></li>
+</ul>
+</li>
+<li><a href="#orgd2221ab">5. Questions:</a></li>
+</ul>
+</div>
+</div>
+
+
+<div id="outline-container-s1" class="outline-2">
+<h2 id="s1"><span class="section-number-2">1.</span> Introduction</h2>
+<div class="outline-text-2" id="text-s1">
+<p>
+Today, we are going to review the topics presented in chapter 5. Then we will
+try to solve some sample examples that will help you answer some of the
+questions presented in assignment #2.
+</p>
+</div>
+</div>
+
+<div id="outline-container-s2" class="outline-2">
+<h2 id="s2"><span class="section-number-2">2.</span> Names</h2>
+<div class="outline-text-2" id="text-s2">
+<p>
+A name is a string of characters used to identify some entity in a program.
+Names in most programming languages have the same form: a letter followed by a
+string consisting of letters, digits, and underscore characters <code>( _ )</code>.
+</p>
+
+<p>
+Examples:
+</p>
+
+<p>
+<code>Haskell</code>
+</p>
+<div class="org-src-container">
+<pre class="src src-text">&lt;H_ID&gt; ::= &lt;head&gt; {&lt;tail&gt;}
+&lt;head&gt; ::= &lt;upper&gt; | &lt;lower&gt;
+&lt;tail&gt; ::= &lt;upper&gt; | &lt;lower&gt; | &lt;special&gt; | &lt;digits&gt; | '
+&lt;lower&gt; ::= a | b | c | d | e | f | g | h | i | j | k | l | m | n | o | p | q | r | s | t | u | v | w | x | y | z | _
+&lt;upper&gt; ::= A | B | C | D | E | F | G | H | I | J | K | L | M | N | O | P | Q | R | S | T | U | V | W | X | Y | Z
+&lt;digits&gt; ::= 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9
+</pre>
+</div>
+
+<p>
+Two main primary issues with naming are?
+</p>
+
+<ul class="org-ul">
+<li>Case sensitivity</li>
+<li>Special words</li>
+
+<li>Question:
+<ul class="org-ul">
+<li>What is a reserved word?</li>
+</ul></li>
+
+<li>Exercise: Look at the following names:
+
+<ol class="org-ol">
+<li>FirstName</li>
+
+<li>First<sub>Name</sub></li>
+
+<li>firstname</li>
+
+<li>firstName</li>
+
+<li>Which one is better in terms of Readability?</li>
+
+<li>Which one is better in terms of Writability?</li>
+
+<li>Which one is accepted in C programming language?</li>
+
+<li>Which one is better in Python programming language?</li>
+
+<li>Which one is <i>cammel notation</i>?</li>
+
+<li>Which one is not popular anymore?</li>
+</ol></li>
+</ul>
+
+
+<p>
+A program variable is an abstraction of a computer memory cell or collection
+of cells.
+</p>
+
+<p>
+Variables can be characterized as a sextuple of attributes:
+</p>
+
+<ul class="org-ul">
+<li>Name</li>
+
+<li>Address: The memory address with which it is associated</li>
+
+<li>Value: The contents of the location with which the variable is associated</li>
+
+<li>Type: determines the range of values of variables and the set of operations
+that are defined for values of that type; in the case of floating point, type
+also determines the precision</li>
+
+<li>Lifetime [Discuss later]</li>
+
+<li>Scope [Discuss later]</li>
+</ul>
+</div>
+</div>
+
+
+
+<div id="outline-container-s3" class="outline-2">
+<h2 id="s3"><span class="section-number-2">3.</span> Binding</h2>
+<div class="outline-text-2" id="text-s3">
+<p>
+A binding is an association between an entity and an attribute, such as between
+a variable and its type or value, or between an operation and a symbol. Binding
+time is the time at which a binding takes place.
+</p>
+
+<ul class="org-ul">
+<li>A binding is static if it first occurs before run time and remains
+unchanged throughout program execution.
+<ul class="org-ul">
+<li>Type may be specified by explicit or implicit deceleration:
+
+<ul class="org-ul">
+<li>Question: Bring one example for each of the above decelerations:</li>
+</ul></li>
+</ul></li>
+</ul>
+
+<div class="org-src-container">
+<pre class="src src-c#">var sum = 0;
+var total = 0.0;
+var name = "Fred";
+</pre>
+</div>
+
+
+
+<ul class="org-ul">
+<li>A binding is dynamic if it first occurs during execution or can change during
+execution of the program</li>
+</ul>
+</div>
+
+<div id="outline-container-org66893ec" class="outline-3">
+<h3 id="org66893ec"><span class="section-number-3">3.1.</span> Storage Bindings and Lifetime</h3>
+</div>
+</div>
+
+
+
+<div id="outline-container-s4" class="outline-2">
+<h2 id="s4"><span class="section-number-2">4.</span> Scope and Lifetime</h2>
+<div class="outline-text-2" id="text-s4">
+<p>
+The scope of a variable is the range of statements over which it is visible.
+</p>
+
+<p>
+The local variables of a program unit are those that are declared in that unit.
+The nonlocal variables of a program unit are those that are visible in the unit
+but not declared there. Global variables are a special category of nonlocal variables
+</p>
+</div>
+
+<div id="outline-container-org10e6283" class="outline-3">
+<h3 id="org10e6283"><span class="section-number-3">4.1.</span> Static Scope</h3>
+<div class="outline-text-3" id="text-4-1">
+<p>
+The general rule for tracing visibility of a variable:
+</p>
+
+<ul class="org-ul">
+<li>Search declarations, first locally, then in increasingly larger enclosing
+scopes, until one is found for the given name</li>
+
+<li>Enclosing static scopes (to a specific scope) are called its static ancestors;
+the nearest static ancestor is called a static parent</li>
+
+<li>Some languages allow nested subprogram definitions, which create nested static
+scopes</li>
+
+<li>Variables can be hidden from a unit by having a "closer" variable with the
+same name</li>
+</ul>
+
+
+<div class="org-src-container">
+<pre class="src src-javascript">
+<span style="color: #4f97d7; font-weight: bold;">function</span> <span style="color: #bc6ec5; font-weight: bold;">big</span><span style="color: #4f97d7;">()</span> <span style="color: #4f97d7;">{</span> <span style="color: #4f97d7; font-weight: bold;">function</span> sub1<span style="color: #bc6ec5;">()</span> <span style="color: #bc6ec5;">{</span>
+<span style="color: #4f97d7; font-weight: bold;">var</span> <span style="color: #7590db;">x</span> = <span style="color: #a45bad;">7</span>;
+sub2<span style="color: #2d9574;">()</span>; <span style="color: #bc6ec5;">}</span>
+<span style="color: #4f97d7; font-weight: bold;">function</span> <span style="color: #bc6ec5; font-weight: bold;">sub2</span><span style="color: #bc6ec5;">()</span> <span style="color: #bc6ec5;">{</span> <span style="color: #4f97d7; font-weight: bold;">var</span> <span style="color: #7590db;">y</span> = x;
+<span style="color: #bc6ec5;">}</span>
+<span style="color: #4f97d7; font-weight: bold;">var</span> <span style="color: #7590db;">x</span> = <span style="color: #a45bad;">3</span>; sub1<span style="color: #bc6ec5;">()</span>;
+<span style="color: #4f97d7;">}</span>
+</pre>
+</div>
+
+<p>
+What if we consider the static scope rules to trace the visibility of <code>x</code>:
+</p>
+</div>
+</div>
+
+<div id="outline-container-org59f3ded" class="outline-3">
+<h3 id="org59f3ded"><span class="section-number-3">4.2.</span> Blocks</h3>
+<div class="outline-text-3" id="text-4-2">
+<ul class="org-ul">
+<li>The scopes created by blocks, which could be nested in larger blocks, are
+treated exactly like those created by subprograms.</li>
+</ul>
+
+<div class="org-src-container">
+<pre class="src src-c"><span style="color: #ce537a; font-weight: bold;">void</span> <span style="color: #bc6ec5; font-weight: bold;">sub</span><span style="color: #4f97d7;">()</span> <span style="color: #4f97d7;">{</span>
+   <span style="color: #ce537a; font-weight: bold;">int</span> <span style="color: #7590db;">count</span>=<span style="color: #a45bad;">1</span>;
+    <span style="color: #4f97d7; font-weight: bold;">while</span> <span style="color: #bc6ec5;">(</span>count &lt;=<span style="color: #a45bad;">100</span><span style="color: #bc6ec5;">)</span> <span style="color: #bc6ec5;">{</span>
+      <span style="color: #ce537a; font-weight: bold;">int</span> <span style="color: #7590db;">count</span>=<span style="color: #a45bad;">2</span>;
+      count++;
+      ...
+   <span style="color: #bc6ec5;">}</span>
+   printf<span style="color: #bc6ec5;">(</span>count<span style="color: #bc6ec5;">)</span>;
+   ...
+<span style="color: #4f97d7;">}</span>
+</pre>
+</div>
+
+
+
+<ul class="org-ul">
+<li>In <code>Let</code> Scheme:</li>
+</ul>
+
+<div class="org-src-container">
+<pre class="src src-tex">In Scheme:
+(LET (
+   (name1 expression1) ...
+   (namen expressionn)
+)
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org352127b" class="outline-3">
+<h3 id="org352127b"><span class="section-number-3">4.3.</span> Dynamic Scope</h3>
+<div class="outline-text-3" id="text-4-3">
+<p>
+General rule for tracing visibility in dynamic scope:
+</p>
+
+<ul class="org-ul">
+<li>Based on calling sequences of program units, not their textual layout</li>
+
+<li>References to variables are connected to declarations by searching back
+through the chain of subprogram calls that forced execution to this point</li>
+</ul>
+
+<div class="org-src-container">
+<pre class="src src-javascript"><span style="color: #4f97d7; font-weight: bold;">function</span> <span style="color: #bc6ec5; font-weight: bold;">big</span><span style="color: #4f97d7;">()</span> <span style="color: #4f97d7;">{</span>
+    <span style="color: #4f97d7; font-weight: bold;">function</span> <span style="color: #bc6ec5; font-weight: bold;">sub1</span><span style="color: #bc6ec5;">()</span> <span style="color: #bc6ec5;">{</span>
+      <span style="color: #4f97d7; font-weight: bold;">var</span> <span style="color: #7590db;">x</span> = <span style="color: #a45bad;">7</span>;
+      sub2<span style="color: #2d9574;">()</span>;
+    <span style="color: #bc6ec5;">}</span>
+    <span style="color: #4f97d7; font-weight: bold;">function</span> <span style="color: #bc6ec5; font-weight: bold;">sub2</span><span style="color: #bc6ec5;">()</span> <span style="color: #bc6ec5;">{</span> <span style="color: #4f97d7; font-weight: bold;">var</span> <span style="color: #7590db;">y</span> = x;
+    <span style="color: #bc6ec5;">}</span>
+    <span style="color: #4f97d7; font-weight: bold;">var</span> <span style="color: #7590db;">x</span> = <span style="color: #a45bad;">3</span>;
+    sub1<span style="color: #bc6ec5;">()</span>;
+<span style="color: #4f97d7;">}</span>
+</pre>
+</div>
+
+<p>
+Consider tracing this code based on dynamic scope rules. What would be the
+reference point for <code>x</code>?
+</p>
+
+<p>
+When it comes to lifetime, it becomes a bit confusing. Even though it seems that
+these two are related to each other but they are totally different concepts.
+</p>
+</div>
+</div>
+
+
+<div id="outline-container-org5830730" class="outline-3">
+<h3 id="org5830730"><span class="section-number-3">4.4.</span> Referencing Enviroments</h3>
+<div class="outline-text-3" id="text-4-4">
+<p>
+The referencing environment of a statement is the collection of all variables
+that are visible in the statement. The referencing environment of a statement in
+a static- scoped language is the variables declared in its local scope plus the
+collection of all variables of its ancestor scopes that are visible.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-python"><span style="color: #7590db;">g</span> = <span style="color: #a45bad;">3</span>; <span style="color: #2aa1ae; background-color: #292e34;"># </span><span style="color: #2aa1ae; background-color: #292e34;">A global</span>
+<span style="color: #4f97d7; font-weight: bold;">def</span> <span style="color: #bc6ec5; font-weight: bold;">sub1</span><span style="color: #4f97d7;">()</span>:
+<span style="color: #7590db;">a</span> = <span style="color: #a45bad;">5</span>; <span style="color: #2aa1ae; background-color: #292e34;"># </span><span style="color: #2aa1ae; background-color: #292e34;">Creates a local</span>
+<span style="color: #7590db;">b</span> = <span style="color: #a45bad;">7</span>; <span style="color: #2aa1ae; background-color: #292e34;"># </span><span style="color: #2aa1ae; background-color: #292e34;">Creates another local</span>
+. . . &lt;------------------------------ <span style="color: #a45bad;">1</span>
+<span style="color: #4f97d7; font-weight: bold;">def</span> <span style="color: #bc6ec5; font-weight: bold;">sub2</span><span style="color: #4f97d7;">()</span>:
+<span style="color: #4f97d7; font-weight: bold;">global</span> g; <span style="color: #2aa1ae; background-color: #292e34;"># </span><span style="color: #2aa1ae; background-color: #292e34;">Global g is now assignable here</span>
+<span style="color: #7590db;">c</span> = <span style="color: #a45bad;">9</span>; <span style="color: #2aa1ae; background-color: #292e34;"># </span><span style="color: #2aa1ae; background-color: #292e34;">Creates a new local</span>
+. . . &lt;------------------------------ <span style="color: #a45bad;">2</span> <span style="color: #4f97d7; font-weight: bold;">def</span> <span style="color: #bc6ec5; font-weight: bold;">sub3</span><span style="color: #4f97d7;">()</span>:
+<span style="color: #4f97d7; font-weight: bold;">nonlocal</span> <span style="color: #7590db;">c</span>: <span style="color: #2aa1ae; background-color: #292e34;"># </span><span style="color: #2aa1ae; background-color: #292e34;">Makes nonlocal c visible here g = 11; # Creates a new local</span>
+. . . &lt;------------------------------ <span style="color: #a45bad;">3</span>
+</pre>
+</div>
+
+
+<p>
+The referencing environments of the indicated program points are as follows:
+</p>
+
+
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-right" />
+
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="org-right">pints</th>
+<th scope="col" class="org-left">Variables</th>
+<th scope="col" class="org-left">Where Declared</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="org-right">1)</td>
+<td class="org-left">a b</td>
+<td class="org-left">sub 1</td>
+</tr>
+
+<tr>
+<td class="org-right">&#xa0;</td>
+<td class="org-left">g</td>
+<td class="org-left">g for referencing</td>
+</tr>
+</tbody>
+<tbody>
+<tr>
+<td class="org-right">2)</td>
+<td class="org-left">c</td>
+<td class="org-left">sub2</td>
+</tr>
+
+<tr>
+<td class="org-right">&#xa0;</td>
+<td class="org-left">g</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+</tbody>
+<tbody>
+<tr>
+<td class="org-right">3)</td>
+<td class="org-left">c</td>
+<td class="org-left">nonlocal sub2</td>
+</tr>
+
+<tr>
+<td class="org-right">&#xa0;</td>
+<td class="org-left">g</td>
+<td class="org-left">sub 3 (local)</td>
+</tr>
+</tbody>
+</table>
+
+<p>
+Let's have a look at another example:
+</p>
+
+<div class="org-src-container">
+<pre class="src src-javascript"><span style="color: #4f97d7; font-weight: bold;">void</span> <span style="color: #7590db;">sub1</span><span style="color: #4f97d7;">()</span> <span style="color: #4f97d7;">{</span>
+  <span style="color: #ce537a; font-weight: bold;">int</span> <span style="color: #7590db;">a</span>, <span style="color: #7590db;">b</span>;
+  . . . &lt;------------ <span style="color: #a45bad;">1</span>
+ <span style="color: #4f97d7;">}</span> <span style="color: #2aa1ae; background-color: #292e34;">/* </span><span style="color: #2aa1ae; background-color: #292e34;">end of sub1</span><span style="color: #2aa1ae; background-color: #292e34;"> */</span>
+<span style="color: #4f97d7; font-weight: bold;">void</span> <span style="color: #7590db;">sub2</span><span style="color: #4f97d7;">()</span> <span style="color: #4f97d7;">{</span>
+  <span style="color: #ce537a; font-weight: bold;">int</span> <span style="color: #7590db;">b</span>, <span style="color: #7590db;">c</span>;
+ . . . . &lt;------------ <span style="color: #a45bad;">2</span> sub1<span style="color: #bc6ec5;">()</span>;
+ <span style="color: #4f97d7;">}</span> <span style="color: #2aa1ae; background-color: #292e34;">/* </span><span style="color: #2aa1ae; background-color: #292e34;">end of sub2</span><span style="color: #2aa1ae; background-color: #292e34;"> */</span>
+<span style="color: #4f97d7; font-weight: bold;">void</span> <span style="color: #7590db;">main</span><span style="color: #4f97d7;">()</span> <span style="color: #4f97d7;">{</span>
+ <span style="color: #ce537a; font-weight: bold;">int</span> <span style="color: #7590db;">c</span>, <span style="color: #7590db;">d</span>;
+ . . . &lt;------------ <span style="color: #a45bad;">3</span>
+ sub2<span style="color: #bc6ec5;">()</span>;
+  <span style="color: #4f97d7;">}</span>  <span style="color: #2aa1ae; background-color: #292e34;">/* </span><span style="color: #2aa1ae; background-color: #292e34;">end of main</span><span style="color: #2aa1ae; background-color: #292e34;"> */</span>
+</pre>
+</div>
+
+<p>
+Consider the following example program. Assume that the only function calls are
+the following: <code>main</code> calls <code>sub2</code>, which calls <code>sub1</code>.
+</p>
+
+<p>
+The referencing environments of the indicated program points are as follows:
+</p>
+
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-right" />
+
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="org-right">pints</th>
+<th scope="col" class="org-left">Variables</th>
+<th scope="col" class="org-left">Where Declared</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="org-right">1)</td>
+<td class="org-left">a b</td>
+<td class="org-left">sub1</td>
+</tr>
+
+<tr>
+<td class="org-right">&#xa0;</td>
+<td class="org-left">c</td>
+<td class="org-left">sub2</td>
+</tr>
+
+<tr>
+<td class="org-right">&#xa0;</td>
+<td class="org-left">d</td>
+<td class="org-left">main</td>
+</tr>
+
+<tr>
+<td class="org-right">&#xa0;</td>
+<td class="org-left">b c of sub2</td>
+<td class="org-left">hidden</td>
+</tr>
+
+<tr>
+<td class="org-right">&#xa0;</td>
+<td class="org-left">b of main</td>
+<td class="org-left">hidden</td>
+</tr>
+</tbody>
+<tbody>
+<tr>
+<td class="org-right">2)</td>
+<td class="org-left">b c</td>
+<td class="org-left">sub2</td>
+</tr>
+
+<tr>
+<td class="org-right">&#xa0;</td>
+<td class="org-left">d</td>
+<td class="org-left">main</td>
+</tr>
+
+<tr>
+<td class="org-right">&#xa0;</td>
+<td class="org-left">c of main</td>
+<td class="org-left">hidden</td>
+</tr>
+</tbody>
+<tbody>
+<tr>
+<td class="org-right">3)</td>
+<td class="org-left">c d</td>
+<td class="org-left">main</td>
+</tr>
+
+<tr>
+<td class="org-right">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgd2221ab" class="outline-2">
+<h2 id="orgd2221ab"><span class="section-number-2">5.</span> Questions:</h2>
+<div class="outline-text-2" id="text-5">
+<ol class="org-ol">
+<li>Consider the following JavaScript skeletal program:</li>
+</ol>
+
+<div class="org-src-container">
+<pre class="src src-javascript"> <span style="color: #2aa1ae; background-color: #292e34;">// </span><span style="color: #2aa1ae; background-color: #292e34;">The main program</span>
+ <span style="color: #4f97d7; font-weight: bold;">var</span> <span style="color: #7590db;">x</span>;
+ <span style="color: #4f97d7; font-weight: bold;">function</span> <span style="color: #bc6ec5; font-weight: bold;">sub1</span><span style="color: #4f97d7;">(){</span>
+     <span style="color: #4f97d7; font-weight: bold;">var</span> <span style="color: #7590db;">x</span>:
+     <span style="color: #4f97d7; font-weight: bold;">function</span> <span style="color: #bc6ec5; font-weight: bold;">sub2</span><span style="color: #bc6ec5;">(){</span>
+         . . .
+     <span style="color: #bc6ec5;">}</span>
+ <span style="color: #4f97d7;">}</span> 
+ <span style="color: #4f97d7; font-weight: bold;">function</span> <span style="color: #bc6ec5; font-weight: bold;">sub3</span><span style="color: #4f97d7;">(){</span>
+ . . .
+<span style="color: #4f97d7;">}</span>
+</pre>
+</div>
+
+<p>
+Assume that the execution of this program is in the following unit order:
+</p>
+
+<ul class="org-ul">
+<li><code>main</code> calls <code>sub1</code></li>
+<li><code>sub1</code> calls <code>sub2</code></li>
+<li><code>sub2</code> calls <code>sub3</code></li>
+</ul>
+
+<p>
+Assuming static scoping, in the following, which declaration of <code>x</code> is the
+correct one for a reference to <code>x</code>?
+</p>
+
+<p>
+i. <code>sub1</code>, Why? (sub1)
+ii. <code>sub2</code>, Why? (sub1)
+iii. <code>sub3</code>, Why? (main)
+</p>
+
+<p>
+Repeat part a, but assume dynamic scoping:
+</p>
+
+
+<p>
+i. <code>sub1</code>, Why? (sub1)
+ii. <code>sub2</code>, Why? (sub1) 
+iii. <code>sub3</code>, Why? (sub1)
+</p>
+
+<ol class="org-ol">
+<li>Let's write a peace of code in <code>JavaScript</code>:</li>
+</ol>
+
+<div class="org-src-container">
+<pre class="src src-javascript"><span style="color: #4f97d7; font-weight: bold;">var</span> <span style="color: #7590db;">x</span>;
+<span style="color: #4f97d7; font-weight: bold;">function</span> <span style="color: #bc6ec5; font-weight: bold;">sub1</span><span style="color: #4f97d7;">()</span> <span style="color: #4f97d7;">{</span>
+ document.write<span style="color: #bc6ec5;">(</span><span style="color: #2d9574;">"x = "</span> + x + <span style="color: #2d9574;">""</span><span style="color: #bc6ec5;">)</span>;
+<span style="color: #4f97d7;">}</span>
+<span style="color: #4f97d7; font-weight: bold;">function</span> <span style="color: #bc6ec5; font-weight: bold;">sub2</span><span style="color: #4f97d7;">()</span> <span style="color: #4f97d7;">{</span>
+ <span style="color: #4f97d7; font-weight: bold;">var</span> <span style="color: #7590db;">x</span>;
+
+ x = <span style="color: #a45bad;">10</span>;
+ sub1<span style="color: #bc6ec5;">()</span>;
+<span style="color: #4f97d7;">}</span>
+x = <span style="color: #a45bad;">5</span>;
+sub2<span style="color: #4f97d7;">()</span>;
+</pre>
+</div>
+
+<ul class="org-ul">
+<li><p>
+What value of <code>x</code> is displayed if we use static-scope rules? Why?
+</p>
+
+<p>
+x = 5
+</p></li>
+
+<li><p>
+What if we use dynamic-scope rules? Why?
+</p>
+
+<p>
+x = 10
+</p></li>
+
+<li>Let's write another piece of code in <code>JavaScript</code>:</li>
+</ul>
+
+<div class="org-src-container">
+<pre class="src src-javascript"><span style="color: #4f97d7; font-weight: bold;">var</span> <span style="color: #7590db;">x</span>, <span style="color: #7590db;">y</span>, <span style="color: #7590db;">z</span>;
+<span style="color: #4f97d7; font-weight: bold;">function</span> <span style="color: #bc6ec5; font-weight: bold;">sub1</span><span style="color: #4f97d7;">()</span> <span style="color: #4f97d7;">{</span>
+<span style="color: #4f97d7; font-weight: bold;">var</span> <span style="color: #7590db;">a</span>, <span style="color: #7590db;">y</span>, <span style="color: #7590db;">z</span>;
+  <span style="color: #4f97d7; font-weight: bold;">function</span> <span style="color: #bc6ec5; font-weight: bold;">sub2</span><span style="color: #bc6ec5;">()</span> <span style="color: #bc6ec5;">{</span>
+   <span style="color: #4f97d7; font-weight: bold;">var</span> <span style="color: #7590db;">a</span>, <span style="color: #7590db;">b</span>, <span style="color: #7590db;">z</span>;
+   . . .
+  <span style="color: #bc6ec5;">}</span>
+  . . .
+<span style="color: #4f97d7;">}</span>
+<span style="color: #4f97d7; font-weight: bold;">function</span> <span style="color: #bc6ec5; font-weight: bold;">sub3</span><span style="color: #4f97d7;">()</span> <span style="color: #4f97d7;">{</span>
+  <span style="color: #4f97d7; font-weight: bold;">var</span> <span style="color: #7590db;">a</span>, <span style="color: #7590db;">x</span>, <span style="color: #7590db;">w</span>;
+  . . .
+<span style="color: #4f97d7;">}</span>
+</pre>
+</div>
+
+<p>
+List all the variables, along with the program units where they are declared,
+that are visible in the bodies of <code>sub1</code>, <code>sub2</code>, and <code>sub3</code>, assuming
+static scoping is used. Justify your answer:
+</p>
+
+<ul class="org-ul">
+<li>In sub1:
+a     sub1
+y     sub1
+z     sub1
+x     main</li>
+<li>In sub2:
+a sub2
+b     sub2
+z     sub2
+y     sub1
+x     main</li>
+<li>In sub3:
+a sub3
+x sub3
+w sub3
+y main
+z main</li>
+
+<li>Consider the following <code>C</code> program:</li>
+</ul>
+
+<div class="org-src-container">
+<pre class="src src-c"><span style="color: #ce537a; font-weight: bold;">void</span> <span style="color: #bc6ec5; font-weight: bold;">fun</span><span style="color: #4f97d7;">(</span><span style="color: #ce537a; font-weight: bold;">void</span><span style="color: #4f97d7;">)</span> <span style="color: #4f97d7;">{</span>
+<span style="color: #ce537a; font-weight: bold;">int</span> <span style="color: #7590db;">a</span>, <span style="color: #7590db;">b</span>, <span style="color: #7590db;">c</span>; <span style="color: #2aa1ae; background-color: #292e34;">/* </span><span style="color: #2aa1ae; background-color: #292e34;">definition 1</span><span style="color: #2aa1ae; background-color: #292e34;"> */</span>
+. . .
+<span style="color: #4f97d7; font-weight: bold;">while</span> <span style="color: #bc6ec5;">(</span>. . .<span style="color: #bc6ec5;">)</span> <span style="color: #bc6ec5;">{</span>
+<span style="color: #ce537a; font-weight: bold;">int</span> <span style="color: #7590db;">b</span>, <span style="color: #7590db;">c</span>, <span style="color: #7590db;">d</span>; <span style="color: #2aa1ae; background-color: #292e34;">/*</span><span style="color: #2aa1ae; background-color: #292e34;">definition 2</span><span style="color: #2aa1ae; background-color: #292e34;"> */</span>
+. . . &lt;------------- <span style="color: #a45bad;">1</span>
+<span style="color: #4f97d7; font-weight: bold;">while</span> <span style="color: #2d9574;">(</span>. . .<span style="color: #2d9574;">)</span> <span style="color: #2d9574;">{</span>
+<span style="color: #ce537a; font-weight: bold;">int</span> <span style="color: #7590db;">c</span>, <span style="color: #7590db;">d</span>, <span style="color: #7590db;">e</span>; <span style="color: #2aa1ae; background-color: #292e34;">/* </span><span style="color: #2aa1ae; background-color: #292e34;">definition 3</span><span style="color: #2aa1ae; background-color: #292e34;"> */</span>
+. . . &lt;------------- <span style="color: #a45bad;">2</span>
+<span style="color: #2d9574;">}</span>
+. . . &lt;-------------- <span style="color: #a45bad;">3</span>
+<span style="color: #bc6ec5;">}</span>
+. . . &lt;---------------- <span style="color: #a45bad;">4</span>
+<span style="color: #4f97d7;">}</span>
+</pre>
+</div>
+
+<p>
+For each of the four marked points in this function, list each visible variable,
+along with the number of the definition statement that defines it. Justify your
+answer?
+</p>
+
+
+<ul class="org-ul">
+<li>Point 1:
+a 1
+b 2
+c 2
+d 2</li>
+<li>Point 2:
+a 1
+b 2
+c 3
+d 3
+e 3</li>
+<li>Point 3:
+a 1
+b 2
+c 2
+d 2</li>
+</ul>
+<p>
+Point 4:
+  a 1
+  b 1
+  c 1
+</p>
+
+
+<ol class="org-ol">
+<li>Consider the following skeletal <code>C</code> program:</li>
+</ol>
+
+<div class="org-src-container">
+<pre class="src src-c"><span style="color: #ce537a; font-weight: bold;">void</span> <span style="color: #bc6ec5; font-weight: bold;">fun1</span><span style="color: #4f97d7;">(</span><span style="color: #ce537a; font-weight: bold;">void</span><span style="color: #4f97d7;">)</span>; <span style="color: #2aa1ae; background-color: #292e34;">/* </span><span style="color: #2aa1ae; background-color: #292e34;">prototype</span><span style="color: #2aa1ae; background-color: #292e34;"> */</span>
+<span style="color: #ce537a; font-weight: bold;">void</span> <span style="color: #bc6ec5; font-weight: bold;">fun2</span><span style="color: #4f97d7;">(</span><span style="color: #ce537a; font-weight: bold;">void</span><span style="color: #4f97d7;">)</span>; <span style="color: #2aa1ae; background-color: #292e34;">/* </span><span style="color: #2aa1ae; background-color: #292e34;">prototype</span><span style="color: #2aa1ae; background-color: #292e34;"> */</span>
+<span style="color: #ce537a; font-weight: bold;">void</span> <span style="color: #bc6ec5; font-weight: bold;">fun3</span><span style="color: #4f97d7;">(</span><span style="color: #ce537a; font-weight: bold;">void</span><span style="color: #4f97d7;">)</span>; <span style="color: #2aa1ae; background-color: #292e34;">/* </span><span style="color: #2aa1ae; background-color: #292e34;">prototype</span><span style="color: #2aa1ae; background-color: #292e34;"> */</span>
+<span style="color: #ce537a; font-weight: bold;">void</span> <span style="color: #bc6ec5; font-weight: bold;">main</span><span style="color: #4f97d7;">()</span> <span style="color: #4f97d7;">{</span>
+<span style="color: #ce537a; font-weight: bold;">int</span> <span style="color: #7590db;">a</span>, <span style="color: #7590db;">b</span>, <span style="color: #7590db;">c</span>;
+. . .
+<span style="color: #4f97d7;">}</span>
+<span style="color: #ce537a; font-weight: bold;">void</span> <span style="color: #bc6ec5; font-weight: bold;">fun1</span><span style="color: #4f97d7;">(</span><span style="color: #ce537a; font-weight: bold;">void</span><span style="color: #4f97d7;">)</span> <span style="color: #4f97d7;">{</span>
+<span style="color: #ce537a; font-weight: bold;">int</span> <span style="color: #7590db;">b</span>, <span style="color: #7590db;">c</span>, <span style="color: #7590db;">d</span>;
+. . .
+<span style="color: #4f97d7;">}</span>
+<span style="color: #ce537a; font-weight: bold;">void</span> <span style="color: #bc6ec5; font-weight: bold;">fun2</span><span style="color: #4f97d7;">(</span><span style="color: #ce537a; font-weight: bold;">void</span><span style="color: #4f97d7;">)</span> <span style="color: #4f97d7;">{</span>
+<span style="color: #ce537a; font-weight: bold;">int</span> <span style="color: #7590db;">c</span>, <span style="color: #7590db;">d</span>, <span style="color: #7590db;">e</span>;
+. . .
+<span style="color: #4f97d7;">}</span>
+<span style="color: #ce537a; font-weight: bold;">void</span> <span style="color: #bc6ec5; font-weight: bold;">fun3</span><span style="color: #4f97d7;">(</span><span style="color: #ce537a; font-weight: bold;">void</span><span style="color: #4f97d7;">)</span> <span style="color: #4f97d7;">{</span>
+<span style="color: #ce537a; font-weight: bold;">int</span> <span style="color: #7590db;">d</span>, <span style="color: #7590db;">e</span>, <span style="color: #7590db;">f</span>;
+. . .
+<span style="color: #4f97d7;">}</span>
+</pre>
+</div>
+
+<p>
+Given the following calling sequences and assuming that dynamic scoping is used,
+what variables are visible during execution of the last function called? Include
+with each visible variable the name of the function in which it was defined.
+Justify your answer?
+</p>
+
+<p>
+a. <code>main</code> calls <code>fun1</code>; <code>fun1</code> calls <code>fun2</code>; <code>fun2</code> calls <code>fun3</code>.
+b. <code>main</code> calls <code>fun1</code>; <code>fun1</code> calls <code>fun3</code>.
+c. <code>main</code> calls <code>fun2</code>; <code>fun2</code> calls <code>fun3</code>; <code>fun3</code> calls <code>fun1</code>.
+d. <code>main</code> calls <code>fun3</code>; <code>fun3</code> calls <code>fun1</code>.
+e. <code>main</code> calls <code>fun1</code>; <code>fun1</code> calls <code>fun3</code>; <code>fun3</code> calls <code>fun2</code>.
+f. <code>main</code> calls <code>fun3</code>; <code>fun3</code> calls <code>fun2</code>; <code>fun2</code> calls <code>fun1</code>.
+</p>
+
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="org-left">Question</th>
+<th scope="col" class="org-left">Variables</th>
+<th scope="col" class="org-left">Where Declared</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="org-left">a)</td>
+<td class="org-left">d e f</td>
+<td class="org-left">fun3</td>
+</tr>
+
+<tr>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">c</td>
+<td class="org-left">fun2</td>
+</tr>
+
+<tr>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">b</td>
+<td class="org-left">fun1</td>
+</tr>
+
+<tr>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">a</td>
+<td class="org-left">main</td>
+</tr>
+</tbody>
+<tbody>
+<tr>
+<td class="org-left">b)</td>
+<td class="org-left">d e f</td>
+<td class="org-left">fun3</td>
+</tr>
+
+<tr>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">b c</td>
+<td class="org-left">fun1</td>
+</tr>
+
+<tr>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">a</td>
+<td class="org-left">main</td>
+</tr>
+</tbody>
+<tbody>
+<tr>
+<td class="org-left">c)</td>
+<td class="org-left">b c d</td>
+<td class="org-left">fun1</td>
+</tr>
+
+<tr>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">e f</td>
+<td class="org-left">fun3</td>
+</tr>
+
+<tr>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">a</td>
+<td class="org-left">main</td>
+</tr>
+</tbody>
+<tbody>
+<tr>
+<td class="org-left">d)</td>
+<td class="org-left">b c d</td>
+<td class="org-left">fun1</td>
+</tr>
+
+<tr>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">e f</td>
+<td class="org-left">fun3</td>
+</tr>
+
+<tr>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">a</td>
+<td class="org-left">main</td>
+</tr>
+</tbody>
+<tbody>
+<tr>
+<td class="org-left">e)</td>
+<td class="org-left">c d e</td>
+<td class="org-left">fun2</td>
+</tr>
+
+<tr>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">f</td>
+<td class="org-left">fun3</td>
+</tr>
+
+<tr>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">b</td>
+<td class="org-left">fun1</td>
+</tr>
+
+<tr>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">a</td>
+<td class="org-left">main</td>
+</tr>
+</tbody>
+<tbody>
+<tr>
+<td class="org-left">f)</td>
+<td class="org-left">b c d</td>
+<td class="org-left">fun1</td>
+</tr>
+
+<tr>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">e</td>
+<td class="org-left">fun2</td>
+</tr>
+
+<tr>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">f</td>
+<td class="org-left">fun3</td>
+</tr>
+
+<tr>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">a</td>
+<td class="org-left">main</td>
+</tr>
+</tbody>
+</table>
+
+<ol class="org-ol">
+<li>Consider the following program, written in <code>JavaScript</code>-like</li>
+</ol>
+<p>
+syntax:
+</p>
+
+<div class="org-src-container">
+<pre class="src src-javascript"><span style="color: #2aa1ae; background-color: #292e34;">// </span><span style="color: #2aa1ae; background-color: #292e34;">main program</span>
+<span style="color: #4f97d7; font-weight: bold;">var</span> <span style="color: #7590db;">x</span>, <span style="color: #7590db;">y</span>, <span style="color: #7590db;">z</span>;
+<span style="color: #4f97d7; font-weight: bold;">function</span> <span style="color: #bc6ec5; font-weight: bold;">sub1</span><span style="color: #4f97d7;">()</span> <span style="color: #4f97d7;">{</span>
+<span style="color: #4f97d7; font-weight: bold;">var</span> <span style="color: #7590db;">a</span>, <span style="color: #7590db;">y</span>, <span style="color: #7590db;">z</span>;
+. . .
+<span style="color: #4f97d7;">}</span>
+<span style="color: #4f97d7; font-weight: bold;">function</span> <span style="color: #bc6ec5; font-weight: bold;">sub2</span><span style="color: #4f97d7;">()</span> <span style="color: #4f97d7;">{</span>
+<span style="color: #4f97d7; font-weight: bold;">var</span> <span style="color: #7590db;">a</span>, <span style="color: #7590db;">b</span>, <span style="color: #7590db;">z</span>;
+. . .
+<span style="color: #4f97d7;">}</span>
+<span style="color: #4f97d7; font-weight: bold;">function</span> <span style="color: #bc6ec5; font-weight: bold;">sub3</span><span style="color: #4f97d7;">()</span> <span style="color: #4f97d7;">{</span>
+<span style="color: #4f97d7; font-weight: bold;">var</span> <span style="color: #7590db;">a</span>, <span style="color: #7590db;">x</span>, <span style="color: #7590db;">w</span>;
+. . .
+<span style="color: #4f97d7;">}</span>  
+</pre>
+</div>
+
+
+<p>
+Given the following calling sequences and assuming that dynamic scoping
+is used, what variables are visible during execution of the last subprogram
+activated? Include with each visible variable the name of the unit
+where it is declared.
+</p>
+
+
+<p>
+a. <code>main</code> calls <code>sub1</code>; <code>sub1</code> calls <code>sub2</code>; <code>sub2</code> calls <code>sub3</code>.
+b. <code>main</code> calls <code>sub1</code>; <code>sub1</code> calls <code>sub3</code>.
+c. <code>main</code> calls <code>sub2</code>; <code>sub2</code> calls <code>sub3</code>; <code>sub3</code> calls <code>sub1</code>.
+d. <code>main</code> calls <code>sub3</code>; <code>sub3</code> calls <code>sub1</code>.
+e. <code>main</code> calls <code>sub1</code>; <code>sub1</code> calls <code>sub3</code>; <code>sub3</code> calls <code>sub2</code>.
+f. <code>main</code> calls <code>sub3</code>; <code>sub3</code> calls <code>sub2</code>; <code>sub2</code> calls <code>sub1</code>.
+</p>
+
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="org-left">Question</th>
+<th scope="col" class="org-left">Variables</th>
+<th scope="col" class="org-left">Where Declared</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="org-left">a)</td>
+<td class="org-left">a x w</td>
+<td class="org-left">sub3</td>
+</tr>
+
+<tr>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">b z</td>
+<td class="org-left">sub2</td>
+</tr>
+
+<tr>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">y</td>
+<td class="org-left">sub1</td>
+</tr>
+</tbody>
+<tbody>
+<tr>
+<td class="org-left">b)</td>
+<td class="org-left">a x w</td>
+<td class="org-left">sub3</td>
+</tr>
+
+<tr>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">y z</td>
+<td class="org-left">sub1</td>
+</tr>
+</tbody>
+<tbody>
+<tr>
+<td class="org-left">c)</td>
+<td class="org-left">a y z</td>
+<td class="org-left">sub1</td>
+</tr>
+
+<tr>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">x w</td>
+<td class="org-left">sub3</td>
+</tr>
+
+<tr>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">b</td>
+<td class="org-left">sub2</td>
+</tr>
+</tbody>
+<tbody>
+<tr>
+<td class="org-left">d)</td>
+<td class="org-left">a y z</td>
+<td class="org-left">sub1</td>
+</tr>
+
+<tr>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">x w</td>
+<td class="org-left">sub3</td>
+</tr>
+</tbody>
+<tbody>
+<tr>
+<td class="org-left">e)</td>
+<td class="org-left">a b z</td>
+<td class="org-left">sub2</td>
+</tr>
+
+<tr>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">x w</td>
+<td class="org-left">sub3</td>
+</tr>
+
+<tr>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">y</td>
+<td class="org-left">sub1</td>
+</tr>
+</tbody>
+<tbody>
+<tr>
+<td class="org-left">f)</td>
+<td class="org-left">a y z</td>
+<td class="org-left">sub1</td>
+</tr>
+
+<tr>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">b</td>
+<td class="org-left">sub2</td>
+</tr>
+
+<tr>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">x w</td>
+<td class="org-left">sub3</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+<div id="postamble" class="status">
+<p class="date">Date: 2022-10-31 Mon 00:00</p>
+<p class="author">Author: Habib Ghaffari</p>
+<p class="date">Created: 2022-11-08 Tue 10:28</p>
+<p class="validation"><a href="https://validator.w3.org/check?uri=referer">Validate</a></p>
+</div>
+</body>
+</html>

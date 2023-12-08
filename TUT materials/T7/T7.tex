@@ -1,0 +1,614 @@
+% Created 2022-11-15 Tue 14:33
+% Intended LaTeX compiler: pdflatex
+\documentclass[11pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{graphicx}
+\usepackage{longtable}
+\usepackage{wrapfig}
+\usepackage{rotating}
+\usepackage[normalem]{ulem}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{capt-of}
+\usepackage{hyperref}
+\author{Habib Ghaffari}
+\date{\textit{<2022-11-14 Mon>}}
+\title{Tutorial \#7 - Let's practice a bit more}
+\hypersetup{
+ pdfauthor={Habib Ghaffari},
+ pdftitle={Tutorial \#7 - Let's practice a bit more},
+ pdfkeywords={},
+ pdfsubject={},
+ pdfcreator={Emacs 28.1 (Org mode 9.5.2)}, 
+ pdflang={English}}
+\begin{document}
+
+\maketitle
+\tableofcontents
+
+
+\section{Introduction}
+\label{sec:orgf50376d}
+
+In the first part of this tutorial, we will work on the exercises from the last
+tutorial. I will explain how you need to work on each question and justify my
+solutions.
+
+In the second part, we will have an introduction to python classes, how we can
+define them and how they work. I will also introduce python constructors with
+some examples related to \texttt{\_\_init\_\_} and \texttt{\_\_eq\_\_}, which are two handy constructor
+methods.
+
+\section{Questions:}
+\label{sec:org287981d}
+
+\begin{enumerate}
+\item Consider the following JavaScript skeletal program:
+\end{enumerate}
+
+\begin{verbatim}
+  // The main program
+  var x;
+
+  // Defined inside main
+  function sub1(){
+      var x;
+      // Defined inside sub1
+      function sub2(){
+          . . .
+      }
+
+  } 
+// Defined inside main
+function sub3(){
+  . . .
+ }
+\end{verbatim}
+
+Assume that the execution of this program is in the following unit order:
+
+\begin{itemize}
+\item \texttt{main} calls \texttt{sub1}
+\item \texttt{sub1} calls \texttt{sub2}
+\item \texttt{sub2} calls \texttt{sub3}
+\end{itemize}
+
+Assuming static scoping, in the following, which declaration of \texttt{x} is the
+correct one for a reference to \texttt{x}?
+
+\begin{itemize}
+\item Since the scope is static. The place we deifne a function is become important.
+Becuase it is going to show us the refernce to the \texttt{x}
+
+i. sub1 (Because in static scope the search is going to happen locally first.)
+ii. sub1 (There is not local definition of x inside sub2, but sub2 degfined
+ inside sub1 which has a local definiton for x)
+iii. main (We defined the function sub3 on main so the reference for x is going
+ to be main)
+\end{itemize}
+
+Repeat part a, but assume dynamic scoping:
+
+\begin{itemize}
+\item In dynamic scope the sequence of calling functions is important.
+
+i. sub1
+ii. sub1
+iii. sub1
+
+\item Let's write a piece of code in \texttt{JavaScript}:
+\end{itemize}
+
+\begin{verbatim}
+var x;
+// This is inside main ( The reference here still main)
+function sub1() {
+ document.write("x = " + x + "");
+}
+// this is inside main
+function sub2() {
+ var x;
+ // this is inside sub 2
+ x = 10;
+ sub1();
+}
+x = 5;
+sub2();
+\end{verbatim}
+
+\begin{itemize}
+\item What value of \texttt{x} is displayed if we use static-scope rules? Why?
+
+x = 5 (The scope is static. The place we define sub1 becomes important)
+
+\item What if we use dynamic-scope rules? Why?
+
+x = 10 (We find the refernce based on the sequence of calling fucntions)
+
+\item Let's write another piece of code in \texttt{JavaScript}:
+\end{itemize}
+
+\begin{verbatim}
+var x, y, z;
+function sub1() {
+var a, y, z;
+  function sub2() {
+   var a, b, z;
+   . . .
+  }
+  . . .
+}
+function sub3() {
+  var a, x, w;
+  . . .
+}
+\end{verbatim}
+
+List all the variables, along with the program units where they are declared,
+that are visible in the bodies of \texttt{sub1}, \texttt{sub2}, and \texttt{sub3}, assuming
+static scoping is used. Justify your answer:
+
+\begin{itemize}
+\item In sub1:
+
+\item In sub2:
+
+\item In sub3:
+\end{itemize}
+
+
+\begin{enumerate}
+\item Consider the following \texttt{C} program:
+
+\begin{itemize}
+\item C is a static programing language.
+\end{itemize}
+\end{enumerate}
+
+\begin{verbatim}
+void fun(void) {
+int a, b, c; /* definition 1 */
+. . .
+while (. . .) {
+int b, c, d; /*definition 2 */
+. . . <------------- 1
+  while (. . .) {
+    /* Whatever happening inside a block is going to stay inside it.
+    int c, d, e; /* definition 3 */
+    . . . <------------- 2
+  }
+. . . <-------------- 3
+}
+. . . <---------------- 4
+}
+\end{verbatim}
+
+For each of the four marked points in this function, list each visible variable,
+along with the number of the definition statement that defines it. Justify your
+answer?
+
+
+\begin{itemize}
+\item Point 1: (Because b c d are already defined localy in \texttt{fun}, so when we are
+redefing the inside \texttt{while} block. The local definitions of the variables
+going to be hidden.
+a 1
+b 2
+c 2
+d 2
+\item Point 2:
+a 1
+b 2
+c 3
+d 3
+e 3
+\item Point 3:
+\begin{itemize}
+\item (Exactly like point1)
+\end{itemize}
+\item Pint 4:
+\begin{itemize}
+\item a 1 b 1 c 1
+\end{itemize}
+\end{itemize}
+
+
+\begin{enumerate}
+\item Consider the following skeletal \texttt{C} program:
+\end{enumerate}
+
+\begin{verbatim}
+void fun1(void); /* prototype */
+void fun2(void); /* prototype */
+void fun3(void); /* prototype */
+void main() {
+ int a, b, c;
+ . . .
+}
+void fun1(void) {
+ int b, c, d;
+ . . .
+}
+void fun2(void) {
+ int c, d, e;
+ . . .
+}
+void fun3(void) {
+ int d, e, f;
+ . . .
+}
+\end{verbatim}
+
+Given the following calling sequences and assuming that dynamic scoping is used,
+what variables are visible during execution of the last function called? Include
+with each visible variable the name of the function in which it was defined.
+Justify your answer?
+
+(Sequence of function call)
+
+a. \texttt{main} calls \texttt{fun1}; \texttt{fun1} calls \texttt{fun2}; \texttt{fun2} calls \texttt{fun3}.
+b. \texttt{main} calls \texttt{fun1}; \texttt{fun1} calls \texttt{fun3}.
+c. \texttt{main} calls \texttt{fun2}; \texttt{fun2} calls \texttt{fun3}; \texttt{fun3} calls \texttt{fun1}.
+d. \texttt{main} calls \texttt{fun3}; \texttt{fun3} calls \texttt{fun1}.
+e. \texttt{main} calls \texttt{fun1}; \texttt{fun1} calls \texttt{fun3}; \texttt{fun3} calls \texttt{fun2}.
+f. \texttt{main} calls \texttt{fun3}; \texttt{fun3} calls \texttt{fun2}; \texttt{fun2} calls \texttt{fun1}.
+
+\begin{center}
+\begin{tabular}{lll}
+\hline
+Question & Variables & Where Declared\\
+\hline
+a) & d e f & fun3\\
+ & c & fun2\\
+ & b & fun1\\
+ & a & main\\
+\hline
+b) &  & \\
+ &  & \\
+ &  & \\
+\hline
+c) &  & \\
+ &  & \\
+ &  & \\
+\hline
+d) &  & \\
+ &  & \\
+ &  & \\
+\hline
+e) &  & \\
+ &  & \\
+ &  & \\
+ &  & \\
+\hline
+f) &  & \\
+ &  & \\
+ &  & \\
+ &  & \\
+\hline
+\end{tabular}
+\end{center}
+
+\begin{enumerate}
+\item Consider the following program, written in \texttt{JavaScript}-like
+\end{enumerate}
+syntax:
+
+\begin{verbatim}
+// main program
+var x, y, z;
+function sub1() {
+var a, y, z;
+. . .
+}
+function sub2() {
+var a, b, z;
+. . .
+}
+function sub3() {
+var a, x, w;
+. . .
+}  
+\end{verbatim}
+
+
+Given the following calling sequences and assuming that dynamic scoping
+is used, what variables are visible during execution of the last subprogram
+activated? Include with each visible variable the name of the unit
+where it is declared.
+
+a. \texttt{main} calls \texttt{sub1}; \texttt{sub1} calls \texttt{sub2}; \texttt{sub2} calls \texttt{sub3}.
+b. \texttt{main} calls \texttt{sub1}; \texttt{sub1} calls \texttt{sub3}.
+c. \texttt{main} calls \texttt{sub2}; \texttt{sub2} calls \texttt{sub3}; \texttt{sub3} calls \texttt{sub1}.
+d. \texttt{main} calls \texttt{sub3}; \texttt{sub3} calls \texttt{sub1}.
+e. \texttt{main} calls \texttt{sub1}; \texttt{sub1} calls \texttt{sub3}; \texttt{sub3} calls \texttt{sub2}.
+f. \texttt{main} calls \texttt{sub3}; \texttt{sub3} calls \texttt{sub2}; \texttt{sub2} calls \texttt{sub1}.
+
+\begin{center}
+\begin{tabular}{lll}
+\hline
+Question & Variables & Where Declared\\
+\hline
+a) &  & \\
+ &  & \\
+ &  & \\
+\hline
+b) &  & \\
+ &  & \\
+\hline
+c) &  & \\
+ &  & \\
+ &  & \\
+\hline
+d) &  & \\
+ &  & \\
+\hline
+e) &  & \\
+ &  & \\
+ &  & \\
+\hline
+f) &  & \\
+ &  & \\
+ &  & \\
+\hline
+\end{tabular}
+\end{center}
+
+
+\section{Coding Together}
+\label{sec:org05841fa}
+
+
+\texttt{Python} is an object-oriented programming language. Unlike procedure-oriented
+programming, where the main emphasis is on functions, object-oriented
+programming stresses on objects.
+
+Like function, definitions begin with the \texttt{def} keyword in Python, class
+definitions begin with a class keyword. The first string inside the class is
+called docstring and has a brief description of the class. Although not
+mandatory, this is highly recommended. Here is a simple class definition:
+
+\begin{verbatim}
+class MyNewClass:
+    '''This is a docstring. I have created a new class'''
+    pass
+\end{verbatim}
+
+A class creates a new local namespace where all its attributes are defined.
+Attributes may be data or functions. There are also special attributes in it
+that begin with double underscores \texttt{\_\textasciitilde{}}. For example, \texttt{\_\_doc\_\_} gives us the
+docstring of that class. Let's test it out. For this purpose, we need to start
+with defining a class. Let's consider we are trying to define a class that holds
+information of students.
+
+\begin{verbatim}
+class Student:
+    '''
+    Class for defining students in our system
+    '''
+    pass
+\end{verbatim}
+
+
+This class should have attributes that show some part of student's identities as
+well as a method for us to access these data.
+
+\begin{verbatim}
+print(Student.__doc__)
+\end{verbatim}
+
+Classes are also able to keep attributes. Let's add an attribute for age of
+student:
+
+\begin{verbatim}
+class Student:
+    '''
+    Class for defining students in our system
+    '''
+
+    # This is for keeping the age of the student
+    age = 10
+
+print(Student.age)
+\end{verbatim}
+
+Or we can define a function inside a class that does some group of processes:
+
+\begin{verbatim}
+class Student:
+    '''
+    Class for defining students in our system
+    '''
+
+    # This is for keeping the age of the student
+    age = 10
+
+    def greet(self):
+        print('Hello')
+
+
+\end{verbatim}
+
+As soon as we define a class, a new class object is created with the
+same name. This class object allows us to access the different attributes as
+well as to instantiate new objects of that class.
+
+\begin{verbatim}
+print(Student.greet)
+\end{verbatim}
+
+\subsection{Creating an Object in Python}
+\label{sec:orgad99a17}
+
+We saw that the class object could be used to access different attributes.
+
+It can also be used to create new object instances (instantiation) of that
+class. The procedure to create an object is similar to a \texttt{function} call.
+
+\begin{verbatim}
+habib = Student()
+\end{verbatim}
+
+This will create a new object instance named \texttt{habib}. We can access the
+attributes of objects using the object name prefix.
+
+\begin{verbatim}
+class Student:
+    '''
+    Class for defining students in our system
+    '''
+
+    # This is for keeping the age of the student
+    age = 10
+
+    def greet(self):
+        print('Hello')
+
+habib = Student()
+
+print(Student.greet)
+
+print(habib.greet)
+
+print(habib.greet())
+\end{verbatim}
+
+You may have noticed the \texttt{self} parameter in function definition inside the
+class but we called the method simply as \texttt{habib.greet()} without any arguments.
+It still worked.
+
+This is because, whenever an object calls its method, the object itself is
+passed as the first argument. So, \texttt{habib.greet()} translates into
+\texttt{Student.greet(habib)}.
+
+In general, calling a method with a list of \texttt{n} arguments is equivalent to calling
+the corresponding function with an argument list that is created by inserting
+the method's object before the first argument.
+
+For these reasons, the first argument of the function in class must be the
+object itself. This is conventionally called \texttt{self}.
+
+\subsection{Constructors in Python}
+\label{sec:org68e3e4e}
+
+Class functions that begin with double underscore \texttt{\_\_} are called special
+functions as they have special meanings.
+
+Of one particular interest is the \texttt{\_\_init\_\_()} function. This special function
+gets called whenever a new object of that class is instantiated.
+
+This type of function is also called \texttt{constructors} in Object Oriented Programming
+(OOP). We normally use it to initialize all the variables.
+
+\begin{verbatim}
+class Student:
+    '''
+    Class for defining students in our system
+    '''
+
+    # This is for keeping the age of the student
+    def __init__(self, first_name,last_name, mac_id, age=10):
+        self.first_name = first_name
+        self.last_name = last_name
+        self.mac_id = mac_id
+        self.age=10
+
+    def get_data(self):
+        print(f'You are looking at {self.first_name} {self.last_name} information with MacID = {self.mac_id} and age of {self.age}.'
+\end{verbatim}
+
+
+In the above example, we defined a new class to represent a student. It has two
+functions, \texttt{\_\_init\_\_()} to initialize the variables and \texttt{get\_data()} to display the
+student's data. Observer that age already has a default value and there is no
+need to pass any value for it.
+
+
+Now let's look at another constructor. \texttt{\_\_eq\_\_} that can be used to compare two
+objects by their values. Python automatically calls the \texttt{\_\_eq\_\_} method of a
+class when you use the \texttt{==} operator to compare the instances of the class. By
+default, Python uses the \texttt{is} operator if you don’t provide a specific
+implementation for the \texttt{\_\_eq\_\_} method. The following shows how to implement the
+\texttt{\_\_eq\_\_} method in the Student class
+
+\begin{verbatim}
+class Student:
+    '''
+    Class for defining students in our system
+    '''
+
+    # This is for keeping the age of the student
+    def __init__(self, first_name,last_name, mac_id, age=10):
+        self.first_name = first_name
+        self.last_name = last_name
+        self.mac_id = mac_id
+        self.age=10
+
+    def get_data(self):
+        print(f'You are looking at {self.first_name} {self.last_name} information with MacID = {self.mac_id} and age of {self.age}.'
+
+    def __eq__(self, other):
+        '''
+        Self addressing the current instance of the object while the other address the second instance of the object
+        '''
+        return self.age == other.age
+
+habib = Student(self, 'Habib', 'Ghaffari', 'ghaffh1')
+hadi = Student(self, 'Hadi', 'Daniali', 'danialih', 20)
+
+if habib == hadi:
+  print('These two persons are the same')
+else:
+ print('These two persons are different')
+\end{verbatim}
+
+But how this function is working? Since Python does not provide left/right
+versions of its comparison operators, how does it decide which function to call?
+Let's make some changes in the function to figure out how it makes the
+comparison:
+
+\begin{verbatim}
+class A(object):
+    def __eq__(self, other):
+        print("A __eq__ called: %r == %r ?" % (self, other))
+        return self.value == other
+class B(object):
+    def __eq__(self, other):
+        print("B __eq__ called: %r == %r ?" % (self, other))
+        return self.value == other
+
+a = A()
+a.value = 3
+b = B()
+b.value = 4
+a == b
+\end{verbatim}
+
+Explanation: The \texttt{a==b} expression invokes \texttt{A.\_\_eq\_\_}, since it exists. Its code
+includes \texttt{self.value == other}. Since int's don't know how to compare themselves
+to B's, Python tries invoking \texttt{B.\_\_eq\_\_} to see if it knows how to compare itself
+to an int. So it will print this:
+
+\begin{verbatim}
+A __eq__ called: <__main__.A object at 0x013BA070> == <__main__.B object at 0x013BA090> ?
+B __eq__ called: <__main__.B object at 0x013BA090> == 3 ?
+\end{verbatim}
+
+Now we have clear vision of how the decision tree for \texttt{\_\_eq\_\_} constructor
+works.
+
+
+\section{Exercises}
+\label{sec:org033956f}
+
+\begin{enumerate}
+\item Try to define a subclass called \texttt{EngStudent}. This class going to address the
+engineering facility students and has an extra attribute called \texttt{faculity}.
+
+\item Implement the \texttt{\_\_init\_\_()}, \texttt{\_\_eq\_\_}, and \texttt{\_\_ne\_\_} constructors for
+\texttt{EngStudent}.
+
+\item Justify how decision tree for \texttt{\_\_eq\_\_} and \texttt{\_\_ne\_\_} going to work? What would
+happen if we do not implement \texttt{\_\_eq\_\_}?
+\end{enumerate}
+\end{document}

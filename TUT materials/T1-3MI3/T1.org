@@ -1,0 +1,290 @@
+#+TITLE: Tutorial #1 - What You Need to Know About the Tutorials
+#+author: Habib Ghaffari
+#+date: 2022-09-19 Mon
+# Use # for commenting your Org file
+# Here I am adding the latex header
+#+latex_header: \usepackage{hyperref}
+#+latex_header: \usepackage{amsmath}
+#+latex_header: \usepackage{listings}
+#+latex_header: \usepackage{xcolor}
+#+latex_header: \usepackage{graphicx}
+
+
+# Adding the color definitions
+#+latex_header_extra: \definecolor{codegreen}{rgb}{0,0.6,0}
+#+latex_header_extra: \definecolor{codegray}{rgb}{0.5,0.5,0.5}
+#+latex_header_extra: \definecolor{codepurple}{rgb}{0.58,0,0.82}
+#+latex_header_extra: \definecolor{backcolour}{rgb}{0.95,0.95,0.92}
+
+
+# Adding the latex code for stylish code display
+#+latex_header_extra: \lstdefinestyle{mystyle}{
+#+latex_header_extra:      backgroundcolor=\color{backcolour},   
+#+latex_header_extra:      commentstyle=\color{codegreen},
+#+latex_header_extra:      keywordstyle=\color{magenta},
+#+latex_header_extra:      numberstyle=\tiny\color{codegray},
+#+latex_header_extra:      stringstyle=\color{codepurple},
+#+latex_header_extra:      basicstyle=\ttfamily\footnotesize,
+#+latex_header_extra:      breakatwhitespace=false,         
+#+latex_header_extra:      breaklines=true,                 
+#+latex_header_extra:      captionpos=b,                    
+#+latex_header_extra:      keepspaces=true,                 
+#+latex_header_extra:      numbers=left,                    
+#+latex_header_extra:      numbersep=5pt,                  
+#+latex_header_extra:      showspaces=false,                
+#+latex_header_extra:      showstringspaces=false,
+#+latex_header_extra:      showtabs=false,                  
+#+latex_header_extra:      tabsize=2
+#+latex_header_extra:  }
+#+latex_header_extra:  \lstset{style=mystyle, language=Python}
+
+
+
+* Introduction
+
+  My name is ~Habib Ghaffari Hadigheh~. It is a mouthful name so you can simply
+  call me ~Habib~ whenever you see me on campus. I am a fourth-year Ph.D.
+  student under the supervision of Dr. Christopher Anand. My main area of
+  research is Machine Learning (ML), Operations Research (Or) and Signal
+  Processing. You can find information about how to contact me via my website at
+  the following address [[https://ghhabib.me][Here]].
+
+  ghaffh1
+
+  Today we are going to learn how to work with the course's website, how to
+  install ~Python~ interpreter, and how to write our first program in python to
+  make sure our interpreter is working properly. I am also going to introduce an
+  IDE helps you to do coding much easier. If we have time I am also
+  going to start working on a very simple language and try to write some
+  programs based on it and see how our example program going to be evaluated.
+
+* Objectives of this tutorial
+
+  At the end of this session you should be able to :
+
+  - Learn to work with the website.
+  - Install the python interpreter in different operating systems.
+  - Install IDE for coding.
+  - Write our first ~Python~ program.
+  - Try to define a very simple language.
+
+** Learn How to Work With the Course's website
+   :PROPERTIES:
+   :CUSTOM_ID: cp2:s1
+   :End:
+
+   Here is the website address:
+
+   [[http://www.cas.mcmaster.ca/~franek/courses/cs3mi3/][http://www.cas.mcmaster.ca/~franek/courses/cs3mi3/]]
+
+   On this website, you can find the course outline, a page for
+   announcements and a link to [[http://www.cas.mcmaster.ca/~franek/courses/cs3mi3/login/startlogin.cgi][sign in]] to your page. You should receive an
+   email around a week ago with your username and password.
+
+   #+name: fig1
+   #+attr_latex: :width 0.8\textwidth :placement [!ht]
+   #+caption: Course Page
+   [[./figures/1.png]]
+
+   #+name: fig2
+   #+attr_latex: :width 0.8\textwidth :placement [!ht]
+   #+caption: Login Page (Put your user name)
+   [[./figures/2.png]]
+
+   #+name: fig3
+   #+attr_latex: :width 0.8\textwidth :placement [!ht]
+   #+caption: Login Page (Type your password)
+   [[./figures/3.png]]
+
+*** Resolve your problems
+
++ As TAs, we do not have any office hours, but we are available via email and you
+  can schedule online/in-person meetings with any of us by emailing us.
+
++ Problems with marking may happen in any course. If you think there is any
+  problem with your marking or the comments/feedback you received is unclear,
+  please contact me. I will figure out who marked your assignment/exam and make
+  sure they provide you with more clarification about your mark. If you are
+  still not satisfied I will ask another TA to mark your submission again. The
+  final step would be for either me or Dr. Franek to look at your solution and
+  make the final decision.
+
+** How to Install ~Python~ Interpreter:
+
+*** Windows
+
+There are a few methods to install ~Python~ interpreter on your machine. The
+straightforward method is to use ~Python~ website.
+
+[[https://www.python.org/]]
+
+Another method is to use ~Chocolatey~. You can install ~Chocolatey~ using the
+following link:
+
+[[https://chocolatey.org/install]]
+
+Then you can simply use the following link to install a version of ~Pthon~ on
+your machine:
+
+[[https://community.chocolatey.org/packages/python/3.9.1]]
+
+Another method is to use ~Anaconda~:
+
+[[https://www.anaconda.com/]]
+
+
+*** Mac OS
+
+Mac OS should have an in-built ~Python~ version pre-installed on the Machine.
+However, you can easily install a version based on your preferences:
+
+The straightforward method again is to use the website:
+
+[[https://www.python.org/downloads/macos/]]
+
+But the most preferable method is to use ~Homebrew~. You can install ~HomeBrew~
+on your machine using the following link:
+
+[[https://brew.sh/]]
+
+The next step is to use the following instruction to install any version of
+python you want:
+
+#+begin_src bash
+brew install python
+#+end_src
+
+
+*** Linux (Ubuntu)
+
+Installing ~Python~ on a Linux (Ubuntu) machine is very easy. Just type the
+following command in your terminal
+
+#+begin_src bash
+sudo apt-get install python
+#+end_src
+
+
+** IDE for ~Python~ Coding
+
+You can use almost any editor to implement python programs. However, the best
+well-known IDE is ~Pycharm~:
+
+[[https://www.jetbrains.com/pycharm/]]
+
+
+** Implement Our First ~Python~ Program
+
+Let's implement our ~Hello World~ program in ~Python~.
+
+#+begin_src python
+print("Hello World!!")
+#+end_src
+
+
+** Simple Language
+
+
+Let's have a look at the ~BNF~ as you know it:
+
+#+begin_src text
+ <postal-address> ::= <name-part> <street-address> <zip-part>
+
+      <name-part> ::= <personal-part> <last-name> <opt-suffix-part> <EOL> | <personal-part> <name-part>
+
+  <personal-part> ::= <initial> "." | <first-name>
+
+ <street-address> ::= <house-num> <street-name> <opt-apt-num> <EOL>
+
+       <zip-part> ::= <town-name> "," <state-code> <ZIP-code> <EOL>
+
+<opt-suffix-part> ::= "Sr." | "Jr." | <roman-numeral> | ""
+    <opt-apt-num> ::= <apt-num> | ""
+#+end_src
+
+
+This translates into English as:
+
++ A postal address consists of a name-part, followed by a street-address part,
+  followed by a zip-code part.
++ A name-part consists of either: a personal-part followed by a last name
+  followed by an optional suffix (Jr., Sr., or dynastic number) and end-of-line,
+  or a personal part followed by a name part (this rule illustrates the use of
+  recursion in BNFs, covering the case of people who use multiple first and
+  middle names and initials).
++ A personal-part consists of either a first name or an initial followed by a
+  dot.
++ A street address consists of a house number, followed by a street name,
+  followed by an optional apartment specifier, followed by an end-of-line.
++ A zip-part consists of a town-name, followed by a comma, followed by a state
+  code, followed by a ZIP-code followed by an end-of-line.
++ An opt-suffix-part consists of a suffix, such as "Sr.", "Jr." or a
+  roman-numeral, or an empty string (i.e. nothing).
++ An opt-apt-num consists of an apartment number or an empty string (i.e.
+  nothing).
+
+  
+The language we are going to define contains just a handful of syntactic forms:
+the boolean constants ~true~ and ~false~, conditional expressions, the numeric
+constant 0, the arithmetic operators ~succ~ (successor) and ~pred~ (predecessor),
+and a testing operation ~iszero~ that returns ~true~ when it is applied to ~0~ and
+~false~ when it is applied to some other number.
+
+#+begin_src text
+  <t> ::=                      Term
+      T                        Constant True
+      F                        Constant False
+      0                        Zero
+      if t then t else t       Conditional Expression
+      succ t                   Successor
+      pred t                   Predecessor
+      iszero t                 Zero Test
+#+end_src
+
+A program in the present language is just a term built from the forms given by
+the grammar above. Here are some examples of programs, along with the results of
+evaluating them:
+
+#+begin_src text
+  if (F) then 0 else (succ 0);
+  > succ 0
+
+  iszero (pred (succ 0));
+  > T
+#+end_src
+
+
+What is the evaluation result of the following programs?
+
+#+begin_src text
+  > if (succ 0) then 0 else pred (succ (succ (0)));
+  > if 0 then T else F;
+  > iszero (T);
+#+end_src
+
+
+Exercise:
+
+- How could we evaluate the above expression?
+
+
+Now let's define the above language using ~Haskell~ programming language:
+
+
+#+begin_src haskell
+data term =
+     T -- True Constant
+    |F -- False Constant
+    |Zero -- Zero Constant
+    |Succ term -- Successor
+    |Pred term -- Predecessor
+    |IfThenElse term term term -- Conditional Expression
+    |IsZero term -- Zero Test
+#+end_src
+
+Exercise:
+
+- How could we define the language rules using ~Haskell~?
+
+- Is it possible to define this language in ~Python~? If yes then how?
+
